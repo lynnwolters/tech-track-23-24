@@ -1,7 +1,4 @@
 <script>
-    import BarChart from "./BarChart.svelte"
+    // import BarChart from "./components/BarChart.svelte"
 </script>
 
-<main>
-    <BarChart />
-</main>

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import { onMount } from "svelte"
   import { select, scaleLinear, scaleBand, max } from "d3"
 
@@ -34,9 +34,6 @@
   })
 </script>
 
-<main>
-  <div id="chart"></div>
-</main>
+<div id="chart"></div>
 
-<style>
-</style>  
+ -->
