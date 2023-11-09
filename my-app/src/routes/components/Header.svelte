@@ -28,7 +28,7 @@
     h1 {
         grid-column-start: 2;
         grid-column-end: 12;
-        margin: .6em 0;
+        margin: 1em 0;
         text-align: center;
     }
 
