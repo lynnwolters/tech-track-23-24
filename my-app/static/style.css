@@ -1,3 +1,4 @@
+/* CSS RESET */
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +13,7 @@ a, button {
     cursor: pointer;
 }
 
+/* FONTS */
 @font-face {
     font-family: 'Coder\'s Crux';
     src: url('./fonts/Coders-Crux.woff') format('woff');
@@ -22,9 +24,98 @@ a, button {
     src: url('./fonts/PerfectDOSVGA437.woff') format('woff');
 }
 
+/* COLORS */
 :root {
     --color-1: #6810D7;
     --color-2: #DA47FF;
     --color-3: #FFFFFF;
     --color-4: #383838;
 }
+
+/* TEXT */
+.title-normal, .title-small {
+    font-family: 'Perfect DOS VGA 437';
+    color: var(--color-2);
+    line-height: 80%;
+    text-transform: uppercase;
+    letter-spacing: -.05em;
+}
+
+.title-normal {
+    font-size: 9.5em;
+}
+
+.title-small {
+    font-size: 2.5em;
+}
+
+.p-text-normal, .p-text-small {
+    font-family: 'Coder\'s Crux';
+    color: var(--color-3);
+    line-height: 70%;
+    text-transform: uppercase;
+}
+
+.p-text-normal {
+    font-size: 1.625em;
+}
+
+.p-text-small {
+    font-size: 1.25em;
+}
+
+@media (max-width: 1200px) {
+    .title-normal {
+        font-size: 7em;
+    }
+    
+    .title-small {
+        font-size: 2em;
+    }
+
+    .p-text-normal {
+        font-size: 1.4em;
+    }
+    
+    .p-text-small {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 900px) {
+    .title-normal {
+        font-size: 5em;
+    }
+    
+    .title-small {
+        font-size: 1.7em;
+    }
+
+    .p-text-normal {
+        font-size: 1.2em;
+    }
+    
+    .p-text-small {
+        font-size: .9em;
+    }
+}
+
+@media (max-width: 560px) {
+    .title-normal {
+        font-size: 4em;
+    }
+    
+    .title-small {
+        font-size: 1.5em;
+    }
+
+    .p-text-normal {
+        font-size: 1.1em;
+    }
+    
+    .p-text-small {
+        font-size: .8em;
+    }
+}
+
+
