@@ -5,7 +5,14 @@
     </div>
     
     <div>
-        <svg width="561" height="499" viewBox="0 0 561 499" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <p class="p-text-normal">The effects that victims experience from online crime</p>
+        <div>
+            <button class="p-text-small">All</button>
+            <button class="p-text-small">Fraude and scams</button>
+            <button class="p-text-small">Hacking</button>
+            <button class="p-text-small">Threats and intimidation</button>
+        </div>
+        <svg style="width: 80%; height: auto;" viewBox="0 0 561 499" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="0.5" y="67.5" width="127" height="63" rx="7.5" fill="#DA47FF" stroke="#383838"/>
             <rect x="131.5" y="67.5" width="428" height="63" rx="7.5" fill="#9C55E3" stroke="#383838"/>
             <rect x="0.5" y="134.5" width="110" height="64" rx="7.5" fill="#DA47FF" stroke="#383838"/>
@@ -59,9 +66,26 @@
     /* CHART */
     section div:nth-of-type(2) {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         margin: 0 2em 12em 2em;
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(1)  {
+        display: flex;
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(1) button  {
+        background: var(--color-3);
+        border: solid 2px var(--color-4);
+        color: var(--color-4);
+        padding: 1em 1.4em;
+        margin: 2em .2em;
+        border-radius: .4em;
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(1) button:hover  {
+        background: var(--color-2);
     }
 
     /* RECAP */
