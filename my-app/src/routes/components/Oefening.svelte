@@ -11,10 +11,14 @@
             .style("text-align", "right")
             .style("color", "white")
 
+        const colorScale = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .range(["lightblue", "steelblue"])
+
         div.selectAll("div")
             .data(data)
             .join("div")
-            .style("background", "steelblue")
+            .style("background", d => colorScale(d)) 
             .style("padding", "4px")
             .style("margin", "2px")
             .style("width", d => `${d * 10}px`)

@@ -4,6 +4,7 @@
     import Effects from "./components/Effects.svelte"
     import Causes from "./components/Causes.svelte"
     import Conclusion from "./components/Conclusion.svelte"
+    // import Oefening from "./components/Oefening.svelte"
 </script>
 
 <link rel="stylesheet" href="style.css">
@@ -15,6 +16,7 @@
         <Effects />
         <Causes />
         <Conclusion />
+        <!-- <Oefening /> -->
     </main>
 </body>
 
