@@ -84,11 +84,11 @@
         }
     }
 
-        cell.filter(d => d.depth === 1)
-            .call(selection => addTextToCell(selection, getTransformFunction))
+    cell.filter(d => d.depth === 1)
+        .call(selection => addTextToCell(selection, getTransformFunction))
 
-        cell.filter(d => d.depth === 2)
-            .call(selection => addTextToCell(selection, getTransformFunction))
+    cell.filter(d => d.depth === 2)
+        .call(selection => addTextToCell(selection, getTransformFunction))
 
     return svg.node()
 
