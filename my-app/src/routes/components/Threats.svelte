@@ -1,114 +1,98 @@
 <script>
-	import {onMount} from 'svelte'
-	import * as d3 from 'd3'
+    import { onMount } from 'svelte'
+    import * as d3 from 'd3'
 
-	let sunburstChart
-	
-	onMount(async function() {
-        const response = await fetch('./data/data.json')
-		const data = await response.json()
-		console.log(data)
-		const chart = Sunburst(data, {
-			value: d => d.value, 
-			label: d => d.name, 
-			title: (d, n) => `${n.ancestors().reverse().map(d => d.data.name).join(".")}\n${n.value.toLocaleString("en")}`, 
-			width: 600,
-			height: 600
-		})
-		d3.select(sunburstChart).append(() => chart)
-	})
-	
-	function Sunburst(data, { 
-		path, 
-		id = Array.isArray(data) ? d => d.id : null, 
-		parentId = Array.isArray(data) ? d => d.parentId : null, 
-		children, 
-		value, 
-		sort = (a, b) => d3.descending(a.value, b.value), 
-		label, 
-		title, 
-		link, 
-		linkTarget = "_blank", 
-		width = 640, 
-		height = 400, 
-		margin = 1, 
-		marginTop = margin, 
-		marginRight = margin, 
-		marginBottom = margin, 
-		marginLeft = margin, 
-		padding = 4, 
-		radius = Math.min(width - marginLeft - marginRight, height - marginTop - marginBottom) / 2, 
-		color = d3.interpolateRainbow, 
-		fill = "#ccc", 
-		fillOpacity = 0.6, 
-	} = {}) {
+    let sunburstChart
 
-		const root = path != null ? d3.stratify().path(path)(data)
-				: id != null || parentId != null ? d3.stratify().id(id).parentId(parentId)(data)
-				: d3.hierarchy(data, children)
-		
-		value == null ? root.count() : root.sum(d => Math.max(0, value(d)))
+    onMount(async function() {
+        const response = await fetch('./data/threatsData.json')
+        const data = await response.json()
+        const generatedSunburstChart = createSunburstChart(data)
+        d3.select(sunburstChart).append(() => generatedSunburstChart)
+    })
 
-		if (sort != null) root.sort(sort)
+    function createSunburstChart(data) {
+        const width = 600
+        const height = 600
 
-		d3.partition().size([2 * Math.PI, radius])(root)
+        const root = d3.hierarchy(data, d => d.children)
+        root.sum(d => Math.max(0, d.value))
 
-		if (color != null) {
-			color = d3.scaleSequential([0, root.children.length - 1], color).unknown(fill)
-			root.children.forEach((child, i) => child.index = i)
-		}
+        const partition = d3.partition()
+            .size([2 * Math.PI, Math.min(width, height) / 2])
+            .padding(0.005)
+        partition(root)
 
-		const arc = d3.arc()
-				.startAngle(d => d.x0)
-				.endAngle(d => d.x1)
-				.padAngle(d => Math.min((d.x1 - d.x0) / 2, 2 * padding / radius))
-				.padRadius(radius / 2)
-				.innerRadius(d => d.y0)
-				.outerRadius(d => d.y1 - padding)
+        const arc = d3.arc()
+            .startAngle(d => d.x0)
+            .endAngle(d => d.x1)
+            .innerRadius(d => d.y0)
+            .outerRadius(d => Math.max(0, d.y1 - 1.5))
+            .cornerRadius(12)
 
-		const svg = d3.create("svg")
-				.attr("viewBox", [
-					marginRight - marginLeft - width / 2,
-					marginBottom - marginTop - height / 2,
-					width,
-					height
-				])
-				.attr("width", width)
-				.attr("height", height)
-				.attr("style", "max-width: 100% height: auto height: intrinsic")
-				.attr("font-family", "sans-serif")
-				.attr("font-size", 10)
-				.attr("text-anchor", "middle")
+        const svg = d3.create('svg')
+            .attr('viewBox', [-width / 2, -height / 2, width, height])
+            .attr('width', width)
+            .attr('height', height)
 
-		const cell = svg
-			.selectAll("a")
-			.data(root.descendants())
-			.join("a")
-				.attr("xlink:href", link == null ? null : d => link(d.data, d))
-				.attr("target", link == null ? null : linkTarget)
+        const cell = svg
+            .selectAll('g')
+            .data(root.descendants())
+            .join('g')
 
-		cell.append("path")
-				.attr("d", arc)
-				.attr("fill", color ? d => color(d.ancestors().reverse()[1]?.index) : fill)
-				.attr("fill-opacity", fillOpacity)
+        const colorScale = d3.scaleOrdinal()
+            .domain(['Scams and fraude', 'Purchase fraude', 'Payment fraude', 'Identity fraude', 'Phishing', 'Hacking', 'Device', 'Account', 'Threats and intimidation', 'Shame texting', 'Stalking', 'Bullying', 'Threats'])
+            .range(['#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#DA47FF', '#DA47FF', '#DA47FF', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC'])
 
-		if (label != null) cell
-			.filter(d => (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10)
-			.append("text")
-				.attr("transform", d => {
-					if (!d.depth) return
-					const x = (d.x0 + d.x1) / 2 * 180 / Math.PI
-					const y = (d.y0 + d.y1) / 2
-					return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`
-				})
-				.attr("dy", "0.32em")
-				.text(d => label(d.data, d))
+        cell.append('path')
+            .attr('d', arc)
+            .attr('fill', d => {
+                return d.depth > 0 ? colorScale(d.data.name) : 'none'
+            })
+            .attr('stroke', d => {
+                return d.depth > 0 ? '#383838' : 'none'
+            })
+            .attr('stroke-width', d => {
+                return d.depth > 0 ? 1 : 0
+        })
 
-		if (title != null) cell.append("title")
-				.text(d => title(d.data, d))
+    function addTextToCell(selection, transformFunction) {
+        selection
+            .append('text')
+            .attr('transform', transformFunction)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', '#383838')
+            .attr('font-family', 'PerfectDOSVGA437')
+            .attr('letter-spacing', '-1px')
+            .text(d => d.data.name.toUpperCase())
+    }
 
-		return svg.node()
-	}
+    function getTransformFunction(d) {
+        if (d.depth === 1) {
+            const [x, y] = arc.centroid(d)
+            const angle = (d.x0 + (d.x1 - d.x0) / 2)
+            let rotation = angle * (180 / Math.PI)
+            if (rotation >= 90 && rotation <= 270) {
+                rotation += 180
+            }
+            return `translate(${x}, ${y}) rotate(${rotation})`
+        } else if (d.depth === 2) {
+            const x = (d.x0 + d.x1) / 2 * 180 / Math.PI
+            const y = (d.y0 + d.y1) / 2
+            return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`
+        }
+    }
+
+        cell.filter(d => d.depth === 1)
+            .call(selection => addTextToCell(selection, getTransformFunction))
+
+        cell.filter(d => d.depth === 2)
+            .call(selection => addTextToCell(selection, getTransformFunction))
+
+    return svg.node()
+
+    }
 </script>
 
 <section>
@@ -118,7 +102,7 @@
     <div>
         <div>
             <p class="p-text-normal">Total online crime in 2022 <br> (32.861 respondents)</p>
-            <div bind:this={sunburstChart}></div>	
+            <div bind:this={sunburstChart}></div>
         </div>
         <div>
             <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
