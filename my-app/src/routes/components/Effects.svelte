@@ -1,5 +1,77 @@
 <script>
-    
+    import { onMount } from 'svelte'
+    import * as d3 from 'd3'
+
+    let stackedBarChart
+
+    onMount(async function() {
+        const response = await fetch('./data/effectsData.json')
+        const data = await response.json()
+        createStackedBarChart(data)
+    })
+
+    function createStackedBarChart(data) {
+
+        const width = 600
+        const height = 400
+
+        const svg = d3
+            .select(stackedBarChart)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+
+        const categories = Object.keys(data[0]).filter((key) => key !== 'name')
+
+        const colorScale = d3
+            .scaleOrdinal()
+            .domain(categories)
+            .range([
+                '#9C55E3',
+                '#DA47FF',
+                '#C19FEC'
+            ])
+
+        const stack = d3
+            .stack()
+            .keys(categories)
+            .order(d3.stackOrderNone)
+            .offset(d3.stackOffsetExpand) 
+
+        const stackedData = stack(data)
+
+        const xScale = d3
+            .scaleLinear()
+            .domain([0, 1]) 
+            .range([0, width])
+
+        const yScale = d3
+            .scaleBand()
+            .domain(data.map((d) => d.name))
+            .range([0, height])
+            .padding(0.1)
+
+        // Hoeken voor afgeronde rechthoeken
+        const cornerRadius = 8;
+
+        svg.selectAll('g')
+            .data(stackedData)
+            .enter()
+            .append('g')
+            .attr('fill', (d) => colorScale(d.key)) 
+            .selectAll('rect')
+            .data((d) => d)
+            .enter()
+            .append('rect')
+            .attr('x', (d) => xScale(d[0]))
+            .attr('y', (d) => yScale(d.data.name))
+            .attr('width', (d) => xScale(d[1]) - xScale(d[0]))
+            .attr('height', yScale.bandwidth())
+            .attr('rx', cornerRadius) // Afgeronde hoeken
+            .attr('ry', cornerRadius)
+            .attr('stroke', '#383838') // Border kleur
+            .attr('stroke-width', 1) // Border dikte
+    }
 </script>
 
 <section>
@@ -12,10 +84,11 @@
         <p class="p-text-normal">The effects that victims experience from online crime</p>
         <div>
             <button class="p-text-small">All</button>
-            <button class="p-text-small">Fraude and scams</button>
+            <button class="p-text-small">Scams and fraude</button>
             <button class="p-text-small">Hacking</button>
             <button class="p-text-small">Threats and intimidation</button>
         </div>
+        <div bind:this={stackedBarChart}></div>
     </div>
     
     <div>

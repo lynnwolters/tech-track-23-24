@@ -2,28 +2,28 @@
   "name": "",
   "children": [
     {
-      "name": "Scams and fraude",
+      "name": "scams and fraude",
       "children": [
-        {"name": "Purchase fraude", "value": 5900},
-        {"name": "Payment fraude", "value": 1100},
-        {"name": "Identity fraude", "value": 600},
-        {"name": "Phishing", "value": 800}
+        {"name": "purchase fraude", "value": 5900},
+        {"name": "payment fraude", "value": 1100},
+        {"name": "identity fraude", "value": 600},
+        {"name": "phishing", "value": 800}
       ]
     },
     {
-      "name": "Hacking",
+      "name": "hacking",
       "children": [
-        {"name": "Device", "value": 2000},
-        {"name": "Account", "value": 3800}
+        {"name": "device", "value": 2000},
+        {"name": "account", "value": 3800}
       ]
     },
     {
-      "name": "Threats and intimidation",
+      "name": "threats and intimidation",
       "children": [
-        {"name": "Shame texting", "value": 800},
-        {"name": "Stalking", "value": 1400},
-        {"name": "Bullying", "value": 1500},
-        {"name": "Threats", "value": 2100}
+        {"name": "shame texting", "value": 800},
+        {"name": "stalking", "value": 1400},
+        {"name": "bullying", "value": 1500},
+        {"name": "threats", "value": 2100}
       ]
     }
   ]

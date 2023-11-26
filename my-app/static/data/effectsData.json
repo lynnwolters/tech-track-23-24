@@ -1,0 +1,9 @@
+[
+  { "name": "Less trust in people", "scamsandfraude": 4390, "hacking": 2430, "threatsandintimidation": 4480 },
+  { "name": "Feeling less safe", "scamsandfraude": 2390, "hacking": 4010, "threatsandintimidation": 3960 },
+  { "name": "Sleeping problems", "scamsandfraude": 600, "hacking": 620, "threatsandintimidation": 1780 },
+  { "name": "Financial problems", "scamsandfraude": 1280, "hacking": 750, "threatsandintimidation": 850 },
+  { "name": "Depression symptoms", "scamsandfraude": 570, "hacking": 400, "threatsandintimidation": 1890 },
+  { "name": "Anxiety symptoms", "scamsandfraude": 390, "hacking": 510, "threatsandintimidation": 1940 },
+  { "name": "Reliving it over and over again", "scamsandfraude": 690, "hacking": 390, "threatsandintimidation": 1280 }
+]

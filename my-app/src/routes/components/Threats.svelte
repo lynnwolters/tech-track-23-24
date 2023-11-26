@@ -20,15 +20,15 @@
 
         const partition = d3.partition()
             .size([2 * Math.PI, Math.min(width, height) / 2])
-            .padding(0.005)
+            .padding(0.01)
         partition(root)
 
         const arc = d3.arc()
             .startAngle(d => d.x0)
             .endAngle(d => d.x1)
             .innerRadius(d => d.y0)
-            .outerRadius(d => Math.max(0, d.y1 - 1.5))
-            .cornerRadius(12)
+            .outerRadius(d => Math.max(0, d.y1 - 3))
+            .cornerRadius(8)
 
         const svg = d3.create('svg')
             .attr('viewBox', [-width / 2, -height / 2, width, height])
@@ -41,7 +41,7 @@
             .join('g')
 
         const colorScale = d3.scaleOrdinal()
-            .domain(['Scams and fraude', 'Purchase fraude', 'Payment fraude', 'Identity fraude', 'Phishing', 'Hacking', 'Device', 'Account', 'Threats and intimidation', 'Shame texting', 'Stalking', 'Bullying', 'Threats'])
+            .domain(['scams and fraude', 'purchase fraude', 'payment fraude', 'identity fraude', 'phishing', 'hacking', 'device', 'account', 'threats and intimidation', 'shame texting', 'stalking', 'bullying', 'threats'])
             .range(['#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#DA47FF', '#DA47FF', '#DA47FF', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC'])
 
         cell.append('path')
@@ -91,7 +91,6 @@
         .call(selection => addTextToCell(selection, getTransformFunction))
 
     return svg.node()
-
     }
 </script>
 
