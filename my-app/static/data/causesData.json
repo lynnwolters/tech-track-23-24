@@ -1,41 +1,12 @@
 [
-  {
-    "name": "vind dit niet nodig",
-    "access code, password, fingerprint, face id": 4140,
-    "different passwords for other devices/accounts": 2270,
-    "passwords with a minimum of 16 characters": 2120,
-    "keeping passwords safe": 3700,
-    "two-step verification": 2090,
-    "update software immediately": 2560,
-    "antivirus or virus scanner": 2940,
-    "backups of important files": 3190,
-    "checking links before opening them": 1410,
-    "checking attached file in email before opening it": 1980
-  },
-  {
-    "name": "vind ik te moeilijk, weet niet hoe het moet",
-    "access code, password, fingerprint, face id": 2870,
-    "different passwords for other devices/accounts": 2800,
-    "passwords with a minimum of 16 characters": 6420,
-    "keeping passwords safe": 1580,
-    "two-step verification": 2450,
-    "update software immediately": 2720,
-    "antivirus or virus scanner": 2260,
-    "backups of important files": 3800,
-    "checking links before opening them": 1820,
-    "checking attached file in email before opening it": 1950
-  },
-  {
-    "name": "geen zin in, kost te veel tijd",
-    "access code, password, fingerprint, face id": 1770,
-    "different passwords for other devices/accounts": 3500,
-    "passwords with a minimum of 16 characters": 1450,
-    "keeping passwords safe": 1960,
-    "two-step verification": 1680,
-    "update software immediately": 2610,
-    "antivirus or virus scanner": 1170,
-    "backups of important files": 1660,
-    "checking links before opening them": 1230,
-    "checking attached file in email before opening it": 1170
-  }
+  { "name": "access code, password, fingerprint, face id", "value": 4140 },
+  { "name": "different passwords for other devices/accounts", "value": 2270 },
+  { "name": "passwords with a minimum of 16 characters", "value": 2120 },
+  { "name": "keeping passwords safe", "value": 3700 },
+  { "name": "two-step verification", "value": 2090 },
+  { "name": "update software immediately", "value": 2560 },
+  { "name": "antivirus or virus scanner", "value": 2940 },
+  { "name": "backups of important files", "value": 3190 },
+  { "name": "checking links before opening them", "value": 1410 },
+  { "name": "checking attached file in email before opening it", "value": 1980 }
 ]

@@ -185,6 +185,10 @@
         background: var(--color-2);
     }
 
+    section div:nth-of-type(2) div:nth-of-type(1) button:nth-of-type(1)  {
+        background: var(--color-2);
+    }
+
     /* RECAP */
     section div:nth-of-type(3) {
         display: grid;

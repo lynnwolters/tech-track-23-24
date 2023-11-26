@@ -4,22 +4,16 @@
 
     let radarChart
 
-    const data = [
-        { axis: 'Category A', value: 0.8 },
-        { axis: 'Category B', value: 0.45 },
-        { axis: 'Category C', value: 0.6 },
-        { axis: 'Category D', value: 0.25 },
-        { axis: 'Category E', value: 0.7 }
-    ]
-
     onMount(async function() {
+        const response = await fetch('./data/causesData.json')
+        const data = await response.json()
         createRadarChart(data)
     })
 
     function createRadarChart(data) {
         const width = 400
         const height = 400
-        const margin = { top: 50, right: 50, bottom: 50, left: 50 }
+        const margin = { top: 150, right: 200, bottom: 150, left: 200 }
 
         const maxValue = Math.max(...data.map(d => d.value))
 
@@ -44,41 +38,82 @@
             .datum(data)
             .attr('class', 'radar-chart-area')
             .attr('d', line)
-            .attr('fill', 'rgba(0, 0, 255, 0.3)')
+            .attr('fill', 'rgba(255, 255, 255, 0.1)')
 
         svg.append('path')
             .datum(data)
             .attr('class', 'radar-chart-line')
             .attr('d', line)
-            .attr('stroke', 'blue')
+            .attr('stroke', '#FFFFFF')
             .attr('fill', 'none')
-            .attr('stroke-width', 2)
+            .attr('stroke-width', 1)
 
-        const circleRadius = [0.2, 0.4, 0.6, 0.8, 1]
+        const circleRadius = [0.35, 0.7, 1.05]
 
         circleRadius.forEach(r => {
             svg.append('circle')
-                .attr('cx', 0)
-                .attr('cy', 0)
                 .attr('r', radius(maxValue) * r)
-                .attr('class', 'radar-chart-circle')
-                .attr('stroke', 'gray')
+                .attr('stroke', '#FFFFFF')
                 .attr('fill', 'none')
-                .attr('stroke-dasharray', '2,2')
+                .attr('stroke-dasharray', '4')
         })
+
+        const labelRadiusMultiplier = 1.4 
+        const labelWidthLimit = 120; // Je kunt dit aanpassen aan je behoeften
 
         const labels = svg.selectAll('.radar-chart-label')
             .data(data)
             .enter().append('text')
+            .attr('fill', '#FFFFFF') 
+            .attr('font-family', 'PerfectDOSVGA437')
+            .attr('letter-spacing', '-1px')
+            .attr('font-size', '12px')
             .attr('class', 'radar-chart-label')
-            .attr('x', (d, i) => radius(maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
-            .attr('y', (d, i) => radius(maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
-            .text(d => d.axis)
+            .attr('x', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
+            .attr('y', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
+            .text(d => d.name)
+            .text(d => d.name.toUpperCase())
             .attr('text-anchor', 'middle')
-            .attr('dy', '0.35em')
+            .call(wrap, labelWidthLimit);
+
+        const lines = svg.selectAll('.radar-chart-line-connect')
+            .data(data)
+            .enter().append('line')
+            .attr('class', 'radar-chart-line-connect')
+            .attr('x1', 0)
+            .attr('y1', 0)
+            .attr('x2', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
+            .attr('y2', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
+            .attr('stroke', '#FFFFFF')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4')
+
+        function wrap(text, width) {
+            text.each(function () {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1,
+                    y = text.attr("y"),
+                    x = text.attr("x"),
+                    dy = parseFloat(text.attr("dy")) || 0,
+                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    }
+                }
+            });
+        }
     }
 </script>
-
 
 <section>
     
@@ -94,6 +129,7 @@
             <button class="p-text-small">Reason 2</button>
             <button class="p-text-small">Reason 3</button>
         </div> 
+        <p class="p-text-normal">“I don't think it's necessary.”</p>
         <div bind:this={radarChart}></div> 
     </div>
     
@@ -136,6 +172,10 @@
     }
 
     section div:nth-of-type(2) div:nth-of-type(1) button:hover  {
+        background: var(--color-2);
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(1) button:nth-of-type(2)  {
         background: var(--color-2);
     }
 
