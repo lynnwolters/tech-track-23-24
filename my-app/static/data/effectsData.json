@@ -1,9 +1,9 @@
 [
-  { "name": "Less trust in people", "scamsandfraude": 4390, "hacking": 2430, "threatsandintimidation": 4480 },
-  { "name": "Feeling less safe", "scamsandfraude": 2390, "hacking": 4010, "threatsandintimidation": 3960 },
-  { "name": "Sleeping problems", "scamsandfraude": 600, "hacking": 620, "threatsandintimidation": 1780 },
-  { "name": "Financial problems", "scamsandfraude": 1280, "hacking": 750, "threatsandintimidation": 850 },
-  { "name": "Depression symptoms", "scamsandfraude": 570, "hacking": 400, "threatsandintimidation": 1890 },
-  { "name": "Anxiety symptoms", "scamsandfraude": 390, "hacking": 510, "threatsandintimidation": 1940 },
-  { "name": "Reliving it over and over again", "scamsandfraude": 690, "hacking": 390, "threatsandintimidation": 1280 }
+  { "name": "less trust in people", "scams and fraude": 4390, "hacking": 2430, "threats and intimidation": 4480 },
+  { "name": "feeling less safe", "scams and fraude": 2390, "hacking": 4010, "threats and intimidation": 3960 },
+  { "name": "sleeping problems", "scams and fraude": 600, "hacking": 620, "threats and intimidation": 1780 },
+  { "name": "financial problems", "scams and fraude": 1280, "hacking": 750, "threats and intimidation": 850 },
+  { "name": "depression symptoms", "scams and fraude": 570, "hacking": 400, "threats and intimidation": 1890 },
+  { "name": "anxiety symptoms", "scams and fraude": 390, "hacking": 510, "threats and intimidation": 1940 },
+  { "name": "reliving it", "scams and fraude": 690, "hacking": 390, "threats and intimidation": 1280 }
 ]

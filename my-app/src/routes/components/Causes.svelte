@@ -1,3 +1,85 @@
+<script>
+    import { onMount } from 'svelte'
+    import * as d3 from 'd3'
+
+    let radarChart
+
+    const data = [
+        { axis: 'Category A', value: 0.8 },
+        { axis: 'Category B', value: 0.45 },
+        { axis: 'Category C', value: 0.6 },
+        { axis: 'Category D', value: 0.25 },
+        { axis: 'Category E', value: 0.7 }
+    ]
+
+    onMount(async function() {
+        createRadarChart(data)
+    })
+
+    function createRadarChart(data) {
+        const width = 400
+        const height = 400
+        const margin = { top: 50, right: 50, bottom: 50, left: 50 }
+
+        const maxValue = Math.max(...data.map(d => d.value))
+
+        const angleSlice = (Math.PI * 2) / data.length
+
+        const svg = d3.select(radarChart)
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', `translate(${margin.left + width / 2},${margin.top + height / 2})`)
+
+        const radius = d3.scaleLinear()
+            .domain([0, maxValue])
+            .range([0, Math.min(width / 2, height / 2)])
+
+        const line = d3.lineRadial()
+            .angle((d, i) => i * angleSlice)
+            .radius(d => radius(d.value))
+
+        svg.append('path')
+            .datum(data)
+            .attr('class', 'radar-chart-area')
+            .attr('d', line)
+            .attr('fill', 'rgba(0, 0, 255, 0.3)')
+
+        svg.append('path')
+            .datum(data)
+            .attr('class', 'radar-chart-line')
+            .attr('d', line)
+            .attr('stroke', 'blue')
+            .attr('fill', 'none')
+            .attr('stroke-width', 2)
+
+        const circleRadius = [0.2, 0.4, 0.6, 0.8, 1]
+
+        circleRadius.forEach(r => {
+            svg.append('circle')
+                .attr('cx', 0)
+                .attr('cy', 0)
+                .attr('r', radius(maxValue) * r)
+                .attr('class', 'radar-chart-circle')
+                .attr('stroke', 'gray')
+                .attr('fill', 'none')
+                .attr('stroke-dasharray', '2,2')
+        })
+
+        const labels = svg.selectAll('.radar-chart-label')
+            .data(data)
+            .enter().append('text')
+            .attr('class', 'radar-chart-label')
+            .attr('x', (d, i) => radius(maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
+            .attr('y', (d, i) => radius(maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
+            .text(d => d.axis)
+            .attr('text-anchor', 'middle')
+            .attr('dy', '0.35em')
+    }
+</script>
+
+
 <section>
     
     <div>
@@ -11,7 +93,8 @@
             <button class="p-text-small">Reason 1</button>
             <button class="p-text-small">Reason 2</button>
             <button class="p-text-small">Reason 3</button>
-        </div>  
+        </div> 
+        <div bind:this={radarChart}></div> 
     </div>
     
     <div>

@@ -12,8 +12,8 @@
     })
 
     function createSunburstChart(data) {
-        const width = 600
-        const height = 600
+        const width = 500
+        const height = 500
 
         const root = d3.hierarchy(data, d => d.children)
         root.sum(d => Math.max(0, d.value))

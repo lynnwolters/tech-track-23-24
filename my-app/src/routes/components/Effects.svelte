@@ -12,14 +12,17 @@
 
     function createStackedBarChart(data) {
 
-        const width = 600
+        const width = 500
         const height = 400
+        const margin = { top: 0, right: 200, bottom: 0, left: 200 }
 
         const svg = d3
             .select(stackedBarChart)
             .append('svg')
-            .attr('width', width)
-            .attr('height', height)
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', `translate(${margin.left},${margin.top})`)
 
         const categories = Object.keys(data[0]).filter((key) => key !== 'name')
 
@@ -49,10 +52,13 @@
             .scaleBand()
             .domain(data.map((d) => d.name))
             .range([0, height])
-            .padding(0.1)
+            .padding(0.05)
 
-        // Hoeken voor afgeronde rechthoeken
-        const cornerRadius = 8;
+        const cornerRadiusBig = 8
+        const cornerRadiusSmall = 4
+        const segmentSpacing = 1.5 
+        const labelOffset = 8
+        const labelBackground = '#FFFFFF'
 
         svg.selectAll('g')
             .data(stackedData)
@@ -63,14 +69,60 @@
             .data((d) => d)
             .enter()
             .append('rect')
-            .attr('x', (d) => xScale(d[0]))
+            .attr('x', (d) => xScale(d[0]) + segmentSpacing) 
             .attr('y', (d) => yScale(d.data.name))
-            .attr('width', (d) => xScale(d[1]) - xScale(d[0]))
+            .attr('width', (d) => xScale(d[1]) - xScale(d[0]) - 2 * segmentSpacing) 
             .attr('height', yScale.bandwidth())
-            .attr('rx', cornerRadius) // Afgeronde hoeken
-            .attr('ry', cornerRadius)
-            .attr('stroke', '#383838') // Border kleur
-            .attr('stroke-width', 1) // Border dikte
+            .attr('rx', cornerRadiusBig) 
+            .attr('ry', cornerRadiusBig)
+            .attr('stroke', '#383838') 
+            .attr('stroke-width', 1) 
+
+        svg.selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr('x', -labelOffset)
+            .attr('y', (d) => yScale(d.name) + yScale.bandwidth() / 2)
+            .attr('dy', '0.35em')
+            .attr('fill', '#FFFFFF') 
+            .attr('font-family', 'PerfectDOSVGA437')
+            .attr('letter-spacing', '-1px')
+            .attr('font-size', '12px')
+            .style('background-color', labelBackground) 
+            .attr('text-anchor', 'end')
+            .text((d) => d.name)
+            .text(d => d.name.toUpperCase())
+
+        const legend = svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${width + 8}, 0)`)
+
+        const legendItems = legend.selectAll('.legend-item')
+            .data(categories)
+            .enter().append('g')
+            .attr('class', 'legend-item')
+            .attr('transform', (d, i) => `translate(0, ${i * 28})`) 
+
+        legendItems.append('rect')
+            .attr('width', 24)
+            .attr('height', 24)
+            .style('fill', colorScale)
+            .attr('rx', cornerRadiusSmall) 
+            .attr('ry', cornerRadiusSmall)
+            .attr('stroke', '#383838') 
+            .attr('stroke-width', 1) 
+
+        legendItems.append('text')
+            .attr('x', 32)
+            .attr('y', 12) 
+            .attr('dy', '.35em')
+            .attr('fill', '#FFFFFF') 
+            .attr('font-family', 'PerfectDOSVGA437')
+            .attr('letter-spacing', '-1px')
+            .attr('font-size', '12px')
+            .text((d) => d)
+            .text(d => d.toUpperCase())
     }
 </script>
 
