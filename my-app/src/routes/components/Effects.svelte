@@ -1,14 +1,38 @@
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
 
     let stackedBarChart
+    let activeDataset = 'dataset1'
+    let activeButton = 'dataset1'
+
+    const datasets = {
+        dataset1: './data/effectsDataOne.json',
+        dataset2: './data/effectsDataTwo.json',
+        dataset3: './data/effectsDataThree.json',
+        dataset4: './data/effectsDataFour.json',
+    }
 
     onMount(async function() {
-        const response = await fetch('./data/effectsData.json')
+        loadData(datasets[activeDataset])
+    })
+
+    async function loadData(url) {
+        const response = await fetch(url)
         const data = await response.json()
         createStackedBarChart(data)
-    })
+    }
+
+    async function updateStackedBarChart() {
+        d3.select(stackedBarChart).select('svg').remove()
+        await loadData(datasets[activeDataset])
+    }
+
+    function switchDataset(dataset) {
+        activeDataset = dataset
+        activeButton = dataset
+        tick().then(() => updateStackedBarChart())
+    }
 
     function createStackedBarChart(data) {
 
@@ -32,7 +56,8 @@
             .range([
                 '#9C55E3',
                 '#DA47FF',
-                '#C19FEC'
+                '#C19FEC',
+                '#9F86E4'
             ])
 
         const stack = d3
@@ -135,10 +160,10 @@
     <div>
         <p class="p-text-normal">The effects that victims experience from online crime</p>
         <div>
-            <button class="p-text-small">All</button>
-            <button class="p-text-small">Scams and fraude</button>
-            <button class="p-text-small">Hacking</button>
-            <button class="p-text-small">Threats and intimidation</button>
+            <button on:click={() => switchDataset('dataset1')} class:active={activeButton === 'dataset1'} class="p-text-small">All</button>
+            <button on:click={() => switchDataset('dataset2')} class:active={activeButton === 'dataset2'} class="p-text-small">Scams and fraude</button>
+            <button on:click={() => switchDataset('dataset3')} class:active={activeButton === 'dataset3'} class="p-text-small">Hacking</button>
+            <button on:click={() => switchDataset('dataset4')} class:active={activeButton === 'dataset4'} class="p-text-small">Threats and intimidation</button>
         </div>
         <div bind:this={stackedBarChart}></div>
     </div>
@@ -185,7 +210,7 @@
         background: var(--color-2);
     }
 
-    section div:nth-of-type(2) div:nth-of-type(1) button:nth-of-type(1)  {
+    section div:nth-of-type(2) div:nth-of-type(1) button.active  {
         background: var(--color-2);
     }
 

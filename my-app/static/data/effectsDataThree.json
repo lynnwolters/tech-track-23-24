@@ -1,0 +1,9 @@
+[
+  { "name": "less trust in people", "device": 3230, "account": 2300 },
+  { "name": "feeling less safe", "device": 4660, "account": 3890 },
+  { "name": "sleeping problems", "device": 890, "account": 540 },
+  { "name": "financial problems", "device": 1480, "account": 490 },
+  { "name": "depression symptoms", "device": 760, "account": 330 },
+  { "name": "anxiety symptoms", "device": 680, "account": 490 },
+  { "name": "reliving it", "device": 670, "account": 270 }
+]

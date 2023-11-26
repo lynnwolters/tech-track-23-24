@@ -1,0 +1,9 @@
+[
+  { "name": "less trust in people", "threats": 44.8, "bullying": 58.1, "stalking": 43.6, "shametexting": 42 },
+  { "name": "feeling less safe", "threats": 39, "bullying": 41.5, "stalking": 51.3, "shametexting": 42.7 },
+  { "name": "sleeping problems", "threats": 15.5, "bullying": 25.5, "stalking": 23.5, "shametexting": 24.4 },
+  { "name": "financial problems", "threats": 8.1, "bullying": 9, "stalking": 12, "shametexting": 16.7 },
+  { "name": "depression symptoms", "threats": 13.3, "bullying": 36.5, "stalking": 21.2, "shametexting": 23.5 },
+  { "name": "anxiety symptoms", "threats": 15.7, "bullying": 30.2, "stalking": 24.7, "shametexting": 26.6 },
+  { "name": "reliving it", "threats": 10.6, "bullying": 18.3, "stalking": 17.1, "shametexting": 17.5 }
+]

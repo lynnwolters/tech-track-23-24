@@ -1,14 +1,49 @@
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
 
     let radarChart
+    let activeDataset = 'dataset1'
+    let additionalText = "I don't think it's necessary"
+    let activeButton = 'dataset1'
+
+    const datasets = {
+        dataset1: './data/causesDataOne.json',
+        dataset2: './data/causesDataTwo.json',
+        dataset3: './data/causesDataThree.json',
+    }
 
     onMount(async function() {
-        const response = await fetch('./data/causesData.json')
+        loadData(datasets[activeDataset])
+    })
+
+    async function loadData(url) {
+        const response = await fetch(url)
         const data = await response.json()
         createRadarChart(data)
-    })
+    }
+
+    async function updateRadarChart() {
+        d3.select(radarChart).select('svg').remove()
+        await loadData(datasets[activeDataset])
+    }
+
+    function switchDataset(dataset) {
+        activeDataset = dataset
+        activeButton = dataset
+        switch (dataset) {
+            case 'dataset1':
+                additionalText = "“I don't think it's necessary.”";
+                break;
+            case 'dataset2':
+                additionalText = "“I find it too difficult.”";
+                break;
+            case 'dataset3':
+                additionalText = "“Takes too much time to do it.”";
+                break;
+        }
+        tick().then(() => updateRadarChart())
+    }
 
     function createRadarChart(data) {
         const width = 400
@@ -59,7 +94,7 @@
         })
 
         const labelRadiusMultiplier = 1.4 
-        const labelWidthLimit = 120; // Je kunt dit aanpassen aan je behoeften
+        const labelWidthLimit = 120
 
         const labels = svg.selectAll('.radar-chart-label')
             .data(data)
@@ -74,7 +109,7 @@
             .text(d => d.name)
             .text(d => d.name.toUpperCase())
             .attr('text-anchor', 'middle')
-            .call(wrap, labelWidthLimit);
+            .call(wrap, labelWidthLimit)
 
         const lines = svg.selectAll('.radar-chart-line-connect')
             .data(data)
@@ -99,18 +134,18 @@
                     y = text.attr("y"),
                     x = text.attr("x"),
                     dy = parseFloat(text.attr("dy")) || 0,
-                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+                    tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em")
                 while (word = words.pop()) {
-                    line.push(word);
-                    tspan.text(line.join(" "));
+                    line.push(word)
+                    tspan.text(line.join(" "))
                     if (tspan.node().getComputedTextLength() > width) {
-                        line.pop();
-                        tspan.text(line.join(" "));
-                        line = [word];
-                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                        line.pop()
+                        tspan.text(line.join(" "))
+                        line = [word]
+                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word)
                     }
                 }
-            });
+            })
         }
     }
 </script>
@@ -124,12 +159,11 @@
     <div>
         <p class="p-text-normal">Reasons why people didn’t take security measurements</p>
         <div>
-            <button class="p-text-small">All</button>
-            <button class="p-text-small">Reason 1</button>
-            <button class="p-text-small">Reason 2</button>
-            <button class="p-text-small">Reason 3</button>
+            <button on:click={() => switchDataset('dataset1')} class:active={activeButton === 'dataset1'} class="p-text-small">Reason 1</button>
+            <button on:click={() => switchDataset('dataset2')} class:active={activeButton === 'dataset2'} class="p-text-small">Reason 2</button>
+            <button on:click={() => switchDataset('dataset3')} class:active={activeButton === 'dataset3'} class="p-text-small">Reason 3</button>
         </div> 
-        <p class="p-text-normal">“I don't think it's necessary.”</p>
+        <p class="p-text-normal">{additionalText}</p>
         <div bind:this={radarChart}></div> 
     </div>
     
@@ -175,7 +209,7 @@
         background: var(--color-2);
     }
 
-    section div:nth-of-type(2) div:nth-of-type(1) button:nth-of-type(2)  {
+    section div:nth-of-type(2) div:nth-of-type(1) button.active  {
         background: var(--color-2);
     }
 

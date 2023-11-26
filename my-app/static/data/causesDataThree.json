@@ -1,0 +1,12 @@
+[
+  { "name": "access code, password, fingerprint, face id", "value": 1770 },
+  { "name": "different passwords for other devices/accounts", "value": 3500 },
+  { "name": "passwords with a minimum of 16 characters", "value": 1450 },
+  { "name": "keeping passwords safe", "value": 1960 },
+  { "name": "two-step verification", "value": 1680 },
+  { "name": "update software immediately", "value": 2610 },
+  { "name": "antivirus or virus scanner", "value": 1170 },
+  { "name": "backups of important files", "value": 1660 },
+  { "name": "checking links before opening them", "value": 1230 },
+  { "name": "checking attached file in email before opening it", "value": 1170 }
+]

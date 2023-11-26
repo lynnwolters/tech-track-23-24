@@ -1,0 +1,9 @@
+[
+  { "name": "less trust in people", "purchase fraude": 4310, "payment fraude": 4030, "identity fraude": 4790, "phishing": 5720 },
+  { "name": "feeling less safe", "purchase fraude": 1930, "payment fraude": 3960, "identity fraude": 4270, "phishing": 4670 },
+  { "name": "sleeping problems", "purchase fraude": 460, "payment fraude": 1150, "identity fraude": 1400, "phishing": 1570 },
+  { "name": "financial problems", "purchase fraude": 1080, "payment fraude": 2410, "identity fraude": 1900, "phishing": 2490 },
+  { "name": "depression symptoms", "purchase fraude": 430, "payment fraude": 1240, "identity fraude": 1600, "phishing": 1550 },
+  { "name": "anxiety symptoms", "purchase fraude": 230, "payment fraude": 1060, "identity fraude": 1360, "phishing": 1270 },
+  { "name": "reliving it", "purchase fraude": 490, "payment fraude": 1360, "identity fraude": 1680, "phishing": 1520 }
+]
