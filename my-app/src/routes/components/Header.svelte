@@ -1,10 +1,41 @@
+<script>
+    import { onMount } from 'svelte'
+    import { gsap } from 'gsap/dist/gsap'
+    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+
+    onMount(async function () {
+        gsap.registerPlugin(ScrollTrigger)
+
+        gsap.from('.animation-1', {
+            y: 100,
+            scale: 1.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: 'header',
+                start: 'top top',
+                scrub: 1,
+            },
+            })
+
+            gsap.from('.animation-2', {
+            y: 400,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: 'header',
+                start: 'top top',
+                scrub: 2,
+            },
+        })
+    })
+</script>
+
 <header>
     <nav class="p-text-small">
         <p>By Lynn Wolters</p>
         <p>October, 2023</p>
     </nav>
-    <h1 class="title-normal">The dangers <br> of the world <br> wide web</h1>
-    <p class="p-text-normal">In 2022, the Central Bureau of Statistics (CBS) in the Netherlands conducted a thorough examination into the realm of online crime. The findings of this study provide a comprehensive look into the multifaceted digital threats prevalent in our interconnected world. This article will distill key insights from the CBS report, focusing specifically on three primary categories of online criminality: scams/fraud, hacking, and intimidation/threats. <br> <br> Join us as we navigate through the results of the CBS study, examining the dangers that lurk in the digital shadows and pondering the profound implications these threats have on individuals' mental well-being.</p>
+    <h1 class="title-normal animation-1">The dangers <br> of the world <br> wide web</h1>
+    <p class="p-text-normal animation-2">In 2022, the Central Bureau of Statistics (CBS) in the Netherlands conducted a thorough examination into the realm of online crime. The findings of this study provide a comprehensive look into the multifaceted digital threats prevalent in our interconnected world. This article will distill key insights from the CBS report, focusing specifically on three primary categories of online criminality: scams/fraud, hacking, and intimidation/threats. <br> <br> Join us as we navigate through the results of the CBS study, examining the dangers that lurk in the digital shadows and pondering the profound implications these threats have on individuals' mental well-being.</p>
 </header>
 
 <style>

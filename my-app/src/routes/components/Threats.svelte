@@ -1,8 +1,8 @@
 <script>
     import { onMount } from 'svelte'
-    import {gsap}  from "gsap/dist/gsap"       
-    import {ScrollTrigger} from "gsap/dist/ScrollTrigger"
     import * as d3 from 'd3'
+    import { gsap } from 'gsap/dist/gsap'
+    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let sunburstChart
 
@@ -11,6 +11,20 @@
         const data = await response.json()
         const generatedSunburstChart = createSunburstChart(data)
         d3.select(sunburstChart).append(() => generatedSunburstChart)
+
+        gsap.registerPlugin(ScrollTrigger)
+
+        gsap.from('.animation-3', {
+            y: 100,
+            scale: 1.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: 'header',
+                start: 'top top',
+                scrub: 2,
+                pin: true
+            },
+        })
     })
 
     function createSunburstChart(data) {
@@ -110,7 +124,7 @@
 
 <section>
     <div>
-        <h2 class="title-normal">The Threats</h2>
+        <h2 class="title-normal animation-3">The Threats</h2>
     </div>
     <div>
         <div>
