@@ -2,11 +2,11 @@
   "name": "",
   "children": [
     {
-      "name": "scams and fraude",
+      "name": "scams and fraud",
       "children": [
-        {"name": "purchase fraude", "value": 5900},
-        {"name": "payment fraude", "value": 1100},
-        {"name": "identity fraude", "value": 600},
+        {"name": "purchase fraud", "value": 5900},
+        {"name": "payment fraud", "value": 1100},
+        {"name": "identity fraud", "value": 600},
         {"name": "phishing", "value": 800}
       ]
     },

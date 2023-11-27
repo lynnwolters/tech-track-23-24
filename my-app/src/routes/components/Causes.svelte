@@ -188,7 +188,17 @@
     
     <div>
         <h2 class="title-small">Recap</h2>
-        <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
+        <p class="p-text-normal">
+            Difficulty in Taking Measures:
+            Another factor is the challenge that some individuals face in implementing effective security measures. The online landscape is continually evolving, making it challenging to keep up with the latest security practices. For some, the technical aspects of online security can be intimidating, leading to hesitancy in taking action.
+            <br> <br>
+            Negligence:
+            Negligence also plays a role in the increasing number of victims of online crime. Some individuals do not take security measures seriously or mistakenly believe that it won't happen to them. This sense of invulnerability can result in negligence when implementing necessary protective measures.
+            <br> <br>
+            Underestimation of Danger:
+            People can also become victims by underestimating the actual danger of online activities. They may not fully understand how their online behavior can impact their safety, inadvertently making them vulnerable to various forms of online criminality.
+            <br> <br>
+            It is essential to enhance awareness, leverage educational resources, and encourage proactive security measures. By understanding why individuals are vulnerable, we can collaboratively work towards reducing online risks and safeguarding individuals from the adverse consequences of cybercrime.</p>
     </div>
 
 </section>

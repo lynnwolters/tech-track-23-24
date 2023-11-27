@@ -179,7 +179,7 @@
         <p class="p-text-normal">The effects that victims experience from online crime</p>
         <div>
             <button on:click={() => switchDataset('dataset1')} class:active={activeButton === 'dataset1'} class="p-text-small">All</button>
-            <button on:click={() => switchDataset('dataset2')} class:active={activeButton === 'dataset2'} class="p-text-small">Scams and fraude</button>
+            <button on:click={() => switchDataset('dataset2')} class:active={activeButton === 'dataset2'} class="p-text-small">Scams and fraud</button>
             <button on:click={() => switchDataset('dataset3')} class:active={activeButton === 'dataset3'} class="p-text-small">Hacking</button>
             <button on:click={() => switchDataset('dataset4')} class:active={activeButton === 'dataset4'} class="p-text-small">Threats and intimidation</button>
         </div>
@@ -188,7 +188,14 @@
     
     <div>
         <h2 class="title-small">Recap</h2>
-        <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
+        <p class="p-text-normal">
+            The research findings highlight that individuals who encounter online intimidation or threats undergo more significant mental challenges compared to those affected by fraud/scams or hacking. Confronting online threats can result in heightened emotional stress, leading to deeper depressive symptoms and prolonged anxiety issues.
+            <br> <br>
+            To illustrate, picture this: dealing with constant mean or threatening messages online is akin to facing an unrelenting bully who never seems to disappear. This ongoing situation can evoke intense feelings of sadness and anxiety, and these emotions might linger for an extended period.
+            <br> <br>
+            In straightforward terms, the impact of online intimidation is comparable to shouldering a heavier emotional burden, especially when contrasted with the consequences of falling victim to scams or experiencing hacking. It's crucial to understand that while intimidation and threats take a more substantial toll on mental health, fraud and scams can have significant financial implications. Being deceived in financial matters or experiencing identity theft due to hacking can lead to lasting financial challenges.
+            <br> <br>
+            These consequences are serious, and individuals may endure the effects for an extended period. Recognizing the gravity of these online crimes underscores the importance of establishing a safer digital environment for everyone, where both mental and financial well-being are prioritized and protected.</p>
     </div>
 
 </section>

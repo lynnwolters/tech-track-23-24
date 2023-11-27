@@ -1,5 +1,7 @@
 <script>
     import { onMount } from 'svelte'
+    import {gsap}  from "gsap/dist/gsap"       
+    import {ScrollTrigger} from "gsap/dist/ScrollTrigger"
     import * as d3 from 'd3'
 
     let sunburstChart
@@ -41,7 +43,7 @@
             .join('g')
 
         const colorScale = d3.scaleOrdinal()
-            .domain(['scams and fraude', 'purchase fraude', 'payment fraude', 'identity fraude', 'phishing', 'hacking', 'device', 'account', 'threats and intimidation', 'shame texting', 'stalking', 'bullying', 'threats'])
+            .domain(['scams and fraud', 'purchase fraud', 'payment fraud', 'identity fraud', 'phishing', 'hacking', 'device', 'account', 'threats and intimidation', 'shame texting', 'stalking', 'bullying', 'threats'])
             .range(['#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#9C55E3', '#DA47FF', '#DA47FF', '#DA47FF', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC', '#C19FEC'])
 
         cell.append('path')
@@ -116,12 +118,25 @@
             <div bind:this={sunburstChart}></div>
         </div>
         <div>
-            <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <p class="p-text-normal">A significant chunk of online crime involves fraud and scams. In particular, financial fraud plays a major role, with shady individuals using tricky methods to take money from people who aren't aware of their schemes.</p>
         </div>
     </div>
     <div>
         <h2 class="title-small">Recap</h2>
-        <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
+        <p class="p-text-normal">
+            Scams / fraud: Online scams often involve fake websites, emails, or messages that seem legitimate but aim to trick you into providing personal or financial information. It's like a digital con game where the bad actors pretend to be someone trustworthy to steal your money or sensitive data.
+            <br> <br>
+            Hacking:
+            Hacking, which means breaking into computer systems without permission, is a growing problem. This isn't just about invading someone's privacy—it can lead to identity theft and losing money.
+            <br> <br>
+            Imagine someone breaking into your virtual "house" and going through your personal stuff. That's what hackers do in the digital world. They might steal your passwords, get access to your bank accounts, or even take control of your social media accounts.
+            <br> <br>
+            Intimidation / threats:
+            When people use the internet to scare or threaten others, it can have serious effects on their mental well-being. Imagine feeling constantly worried or scared because someone is sending you mean or threatening messages online.
+            <br> <br>
+            This form of online crime can lead to deep feelings of sadness and anxiety. It's like dealing with a bully, but instead of facing them in person, the intimidation happens through screens and keyboards.
+            <br> <br>
+            Understanding these categories is crucial because it helps us recognize the tactics bad actors use online and empowers us to protect ourselves better. By being aware of these dangers, we can navigate the digital world more safely.</p>
     </div>
 </section>
 

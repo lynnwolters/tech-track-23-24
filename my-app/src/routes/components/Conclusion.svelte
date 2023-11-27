@@ -5,7 +5,8 @@
     </div>
     
     <div>
-        <p class="p-text-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> <br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
+        <p class="p-text-normal">
+            To sum up, the 2022 CBS study on online crime in the Netherlands gives us a clear picture of the challenges we face in the digital world. Beyond just numbers, it shows that online threats like fraud, hacking, and intimidation have real and profound impacts on individuals and society. <br> <br> The study underscores the need for action. People often become victims due to a lack of awareness, weak security practices, or underestimating online dangers. The key takeaway is that we must be proactive in understanding and protecting ourselves from these threats. <br> <br> So, let's take this as a wake-up call. By promoting cybersecurity education, adopting strong protective measures, and fostering a shared responsibility, we can collectively work to reduce the impact of online crime. For practical tips on staying safe online, check out the article "Don't Let Yourself Become a Victim of Hacking." Stay informed, be vigilant, and let's navigate the digital landscape with confidence.</p>
     </div>
 
 </section>
