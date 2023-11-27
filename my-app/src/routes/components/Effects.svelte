@@ -24,8 +24,26 @@
     }
 
     async function updateStackedBarChart() {
-        d3.select(stackedBarChart).select('svg').remove()
+        d3.select(stackedBarChart)
+            .selectAll('svg')
+            .transition()
+            .duration(200)
+            .attr('opacity', 0)
+        
+        await new Promise(resolve => setTimeout(resolve, 200))
+
+        d3.select(stackedBarChart)
+            .selectAll('svg')
+            .remove();
+        
         await loadData(datasets[activeDataset])
+        
+        d3.select(stackedBarChart)
+            .select('svg')
+            .attr('opacity', 0)
+            .transition()
+            .duration(500)
+            .attr('opacity', 1)
     }
 
     function switchDataset(dataset) {
@@ -36,8 +54,8 @@
 
     function createStackedBarChart(data) {
 
-        const width = 500
-        const height = 400
+        const width = 600
+        const height = 500
         const margin = { top: 0, right: 200, bottom: 0, left: 200 }
 
         const svg = d3

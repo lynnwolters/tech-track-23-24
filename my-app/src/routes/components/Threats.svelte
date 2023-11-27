@@ -12,8 +12,8 @@
     })
 
     function createSunburstChart(data) {
-        const width = 500
-        const height = 500
+        const width = 600
+        const height = 600
 
         const root = d3.hierarchy(data, d => d.children)
         root.sum(d => Math.max(0, d.value))
@@ -56,17 +56,29 @@
                 return d.depth > 0 ? 1 : 0
         })
 
-    function addTextToCell(selection, transformFunction) {
-        selection
-            .append('text')
-            .attr('transform', transformFunction)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '12px')
-            .attr('fill', '#383838')
-            .attr('font-family', 'PerfectDOSVGA437')
-            .attr('letter-spacing', '-1px')
-            .text(d => d.data.name.toUpperCase())
-    }
+        function addTextToCell(selection, transformFunction) {
+            selection
+                .append('text')
+                .attr('transform', transformFunction)
+                .attr('text-anchor', 'middle')
+                .attr('font-size', '12px')
+                .attr('fill', '#383838')
+                .attr('font-family', 'PerfectDOSVGA437')
+                .attr('letter-spacing', '-1px')
+                .each(function (d) {
+                    const text = d.data.name.toUpperCase()
+                    const words = text.split(' ')
+
+                    for (let i = 0; i < words.length; i++) {
+                        const tspan = d3.select(this)
+                            .append('tspan')
+                            .attr('dy', i === 0 ? 0 : '1em') 
+                            .attr('x', 0)
+                            .attr('text-anchor', 'middle')
+                            .text(words[i])
+                    }
+                })
+        }
 
     function getTransformFunction(d) {
         if (d.depth === 1) {

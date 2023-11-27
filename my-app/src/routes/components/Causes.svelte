@@ -24,8 +24,26 @@
     }
 
     async function updateRadarChart() {
-        d3.select(radarChart).select('svg').remove()
+        d3.select(radarChart)
+            .selectAll('svg')
+            .transition()
+            .duration(200)
+            .attr('opacity', 0)
+        
+        await new Promise(resolve => setTimeout(resolve, 200))
+
+        d3.select(radarChart)
+            .selectAll('svg')
+            .remove();
+        
         await loadData(datasets[activeDataset])
+        
+        d3.select(radarChart)
+            .select('svg')
+            .attr('opacity', 0)
+            .transition()
+            .duration(500)
+            .attr('opacity', 1)
     }
 
     function switchDataset(dataset) {
@@ -46,8 +64,8 @@
     }
 
     function createRadarChart(data) {
-        const width = 400
-        const height = 400
+        const width = 500
+        const height = 500
         const margin = { top: 150, right: 200, bottom: 150, left: 200 }
 
         const maxValue = Math.max(...data.map(d => d.value))
@@ -68,6 +86,7 @@
         const line = d3.lineRadial()
             .angle((d, i) => i * angleSlice)
             .radius(d => radius(d.value))
+            .curve(d3.curveCardinalClosed.tension(0.5))
 
         svg.append('path')
             .datum(data)
@@ -88,7 +107,7 @@
         circleRadius.forEach(r => {
             svg.append('circle')
                 .attr('r', radius(maxValue) * r)
-                .attr('stroke', '#FFFFFF')
+                .attr('stroke', 'rgba(255, 255, 255, 0.6)')
                 .attr('fill', 'none')
                 .attr('stroke-dasharray', '4')
         })
@@ -119,7 +138,7 @@
             .attr('y1', 0)
             .attr('x2', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
             .attr('y2', (d, i) => labelRadiusMultiplier * radius(maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
-            .attr('stroke', '#FFFFFF')
+            .attr('stroke', 'rgba(255, 255, 255, 0.6)')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4')
 
