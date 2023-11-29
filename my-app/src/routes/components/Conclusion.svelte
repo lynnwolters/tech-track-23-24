@@ -15,6 +15,9 @@
     /* TITLE */
     section > div:nth-of-type(1) {
         margin: 0 2em 12em 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     section > div:nth-of-type(1) h2 {
@@ -32,6 +35,7 @@
     section div:nth-of-type(2) p {
         grid-column-start: 4;
         grid-column-end: 10;
+        text-align: center;
     }
 
     @media (max-width: 800px) {

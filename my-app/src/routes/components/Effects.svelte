@@ -1,6 +1,8 @@
 <script>
     import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
+    import { gsap } from 'gsap/dist/gsap'
+    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let stackedBarChart
     let activeDataset = 'dataset1'
@@ -21,6 +23,33 @@
         const response = await fetch(url)
         const data = await response.json()
         createStackedBarChart(data)
+
+        gsap.registerPlugin(ScrollTrigger)
+
+        ScrollTrigger.create({
+            trigger: '#effects-title-container',
+            start: 'top top',
+            scrub: 1,
+            pin: true,
+            onEnter: () => {
+                animateTitle()
+            },
+            onLeaveBack: () => { 
+                reverseAnimateTitle()
+            },
+        })
+    }
+
+    function animateTitle() {
+        gsap.timeline()
+            .to('#effects-title-container h2 span:nth-of-type(1)', { opacity: 1})
+            .to('#effects-title-container h2 span:nth-of-type(2)', { opacity: 1})
+    }
+
+    function reverseAnimateTitle() {
+        gsap.timeline()
+            .to('#effects-title-container h2 span:nth-of-type(2)', { opacity: 0 })
+            .to('#effects-title-container h2 span:nth-of-type(1)', { opacity: 0 })
     }
 
     async function updateStackedBarChart() {
@@ -171,8 +200,11 @@
 
 <section>
     
-    <div>
-        <h2 class="title-normal">The Effects</h2>
+    <div id="effects-title-container">
+        <h2 class="title-normal">
+            <span>The</span>
+            <span>Effects</span>
+        </h2>
     </div>
     
     <div>
@@ -202,12 +234,16 @@
 
 <style>
     /* TITLE */
-    section > div:nth-of-type(1) {
-        margin: 0 2em 12em 2em;
+    #effects-title-container {
+        margin: 2em 2em 2em 2em;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    section > div:nth-of-type(1) h2 {
-        text-align: center;
+    #effects-title-container h2 span:nth-of-type(1), #effects-title-container h2 span:nth-of-type(2)  {
+        opacity: 0;
     }
 
     /* CHART */

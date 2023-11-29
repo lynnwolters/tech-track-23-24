@@ -14,18 +14,56 @@
 
         gsap.registerPlugin(ScrollTrigger)
 
-        gsap.from('.animation-3', {
-            y: 100,
-            scale: 1.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: 'header',
-                start: 'top top',
-                scrub: 2,
-                pin: true
+        ScrollTrigger.create({
+            trigger: '#threats-title-container',
+            start: 'top top',
+            scrub: 1,
+            pin: true,
+            onEnter: () => {
+                animateTitle()
+            },
+            onLeaveBack: () => { 
+                reverseAnimateTitle()
+            },
+        })
+
+        ScrollTrigger.create({
+        trigger: '#threats-chart-container',
+        start: 'top top',
+        scrub: 1,
+        pin: true,
+            onEnter: () => {
+                animateCircles()
+            },
+            onLeaveBack: () => { 
+                reverseAnimateCircles()
             },
         })
     })
+
+    function animateTitle() {
+        gsap.timeline()
+            .to('#threats-title-container h2 span:nth-of-type(1)', { opacity: 1})
+            .to('#threats-title-container h2 span:nth-of-type(2)', { opacity: 1})
+    }
+
+    function reverseAnimateTitle() {
+        gsap.timeline()
+            .to('#threats-title-container h2 span:nth-of-type(2)', { opacity: 0 })
+            .to('#threats-title-container h2 span:nth-of-type(1)', { opacity: 0 })
+    }
+
+    function animateCircles() {
+        gsap.timeline()
+            .to('.circle-1', { opacity: .2 })
+            .to('.circle-2', { opacity: 1 })
+    }
+
+    function reverseAnimateCircles() {
+        gsap.timeline()
+            .to('.circle-1', { opacity: 1 })
+            .to('.circle-2', { opacity: .2 })
+    }
 
     function createSunburstChart(data) {
         const width = 600
@@ -113,20 +151,27 @@
     }
 
     cell.filter(d => d.depth === 1)
-        .call(selection => addTextToCell(selection, getTransformFunction))
+            .attr('class', 'circle-1')
+            .attr('opacity', '1')
+            .call(selection => addTextToCell(selection, getTransformFunction))
 
-    cell.filter(d => d.depth === 2)
-        .call(selection => addTextToCell(selection, getTransformFunction))
+        cell.filter(d => d.depth === 2)
+            .attr('class', 'circle-2')
+            .attr('opacity', '.2')
+            .call(selection => addTextToCell(selection, getTransformFunction))
 
     return svg.node()
     }
 </script>
 
 <section>
-    <div>
-        <h2 class="title-normal animation-3">The Threats</h2>
+    <div id="threats-title-container">
+        <h2 class="title-normal">
+            <span>The</span>
+            <span>Threats</span>
+        </h2>
     </div>
-    <div>
+    <div id="threats-chart-container">
         <div>
             <p class="p-text-normal">Total online crime in 2022 <br> (32.861 respondents)</p>
             <div bind:this={sunburstChart}></div>
@@ -138,14 +183,18 @@
     <div>
         <h2 class="title-small">Recap</h2>
         <p class="p-text-normal">
-            Scams / fraud: Online scams often involve fake websites, emails, or messages that seem legitimate but aim to trick you into providing personal or financial information. It's like a digital con game where the bad actors pretend to be someone trustworthy to steal your money or sensitive data.
+            Scams / fraud: 
+            <br> <br>
+            Online scams often involve fake websites, emails, or messages that seem legitimate but aim to trick you into providing personal or financial information. It's like a digital con game where the bad actors pretend to be someone trustworthy to steal your money or sensitive data.
             <br> <br>
             Hacking:
+            <br> <br>
             Hacking, which means breaking into computer systems without permission, is a growing problem. This isn't just about invading someone's privacy—it can lead to identity theft and losing money.
             <br> <br>
             Imagine someone breaking into your virtual "house" and going through your personal stuff. That's what hackers do in the digital world. They might steal your passwords, get access to your bank accounts, or even take control of your social media accounts.
             <br> <br>
             Intimidation / threats:
+            <br> <br>
             When people use the internet to scare or threaten others, it can have serious effects on their mental well-being. Imagine feeling constantly worried or scared because someone is sending you mean or threatening messages online.
             <br> <br>
             This form of online crime can lead to deep feelings of sadness and anxiety. It's like dealing with a bully, but instead of facing them in person, the intimidation happens through screens and keyboards.
@@ -156,23 +205,28 @@
 
 <style>
     /* TITLE */
-    section > div:nth-of-type(1) {
-        margin: 0 2em 12em 2em;
+    #threats-title-container {
+        margin: 2em 2em 2em 2em;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    section > div:nth-of-type(1) h2 {
-        text-align: center;
+    #threats-title-container h2 span:nth-of-type(1), #threats-title-container h2 span:nth-of-type(2)  {
+        opacity: 0;
     }
 
     /* CHART */
-    section > div:nth-of-type(2) {
+    #threats-chart-container {
+        overflow-y: scroll; 
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 0 2em 12em 2em;
     }
 
-    section > div:nth-of-type(2) div:nth-of-type(1) {
+    #threats-chart-container div:nth-of-type(1) {
         grid-column-start: 2;
         grid-column-end: 8;
         display: flex;
@@ -180,12 +234,12 @@
         align-items: center;
     }
 
-    section > div:nth-of-type(2) div:nth-of-type(1) p {
+    #threats-chart-container div:nth-of-type(1) p {
         margin-bottom: 2em;
         text-align: center;
     }
 
-    section > div:nth-of-type(2) div:nth-of-type(2) {
+    #threats-chart-container div:nth-of-type(2) {
         grid-column-start: 9;
         grid-column-end: 12;
         display: flex;

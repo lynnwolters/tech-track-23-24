@@ -7,6 +7,7 @@
 body {
     background-color: var(--color-1);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 a, button {
@@ -53,15 +54,15 @@ a, button {
     font-family: 'Coder\'s Crux';
     color: var(--color-3);
     line-height: 70%;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .p-text-normal {
-    font-size: 1.625em;
+    font-size: 1.725em;
 }
 
 .p-text-small {
-    font-size: 1.25em;
+    font-size: 1.35em;
 }
 
 @media (max-width: 1200px) {
@@ -74,11 +75,11 @@ a, button {
     }
 
     .p-text-normal {
-        font-size: 1.4em;
+        font-size: 1.5em;
     }
     
     .p-text-small {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 }
 
@@ -92,11 +93,11 @@ a, button {
     }
 
     .p-text-normal {
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
     
     .p-text-small {
-        font-size: .9em;
+        font-size: 1em;
     }
 }
 
@@ -110,11 +111,11 @@ a, button {
     }
 
     .p-text-normal {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
     
     .p-text-small {
-        font-size: .8em;
+        font-size: .9em;
     }
 }
 
