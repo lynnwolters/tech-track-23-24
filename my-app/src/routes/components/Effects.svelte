@@ -195,25 +195,24 @@
     <div>
         <h2 class="title-small">Recap</h2>
         <p class="p-text-normal">
-            The research findings highlight that individuals who encounter online intimidation or threats undergo more significant mental challenges compared to those affected by fraud/scams or hacking. Confronting online threats can result in heightened emotional stress, leading to deeper depressive symptoms and prolonged anxiety issues.
+            Research indicates that individuals facing online threats or intimidation experience more pronounced mental challenges than those impacted by scams/fraud or hacking. The constant exposure to mean or threatening messages online is comparable to dealing with a persistent bully, leading to heightened emotional stress, deeper depressive symptoms, and prolonged anxiety.
             <br> <br>
-            To illustrate, picture this: dealing with constant mean or threatening messages online is akin to facing an unrelenting bully who never seems to disappear. This ongoing situation can evoke intense feelings of sadness and anxiety, and these emotions might linger for an extended period.
+            In essence, the emotional impact of online threats and intimidation is more substantial, especially when contrasted with the financial consequences of falling victim to scams/fraud or hacking. It's crucial to note that while intimidation takes a toll on mental health, fraud and scams can have significant financial implications. Deception in financial matters or identity theft resulting from hacking can lead to enduring financial challenges.
             <br> <br>
-            In straightforward terms, the impact of online intimidation is comparable to shouldering a heavier emotional burden, especially when contrasted with the consequences of falling victim to scams or experiencing hacking. It's crucial to understand that while intimidation and threats take a more substantial toll on mental health, fraud and scams can have significant financial implications. Being deceived in financial matters or experiencing identity theft due to hacking can lead to lasting financial challenges.
-            <br> <br>
-            These consequences are serious, and individuals may endure the effects for an extended period. Recognizing the gravity of these online crimes underscores the importance of establishing a safer digital environment for everyone, where both mental and financial well-being are prioritized and protected.</p>
+            These consequences are serious, with individuals enduring their effects for an extended period. Recognizing the gravity of these online crimes will help with the importance of establishing a safer digital environment.
     </div>
 
 </section>
 
 <style>
     /* TITLE */
-    section div:nth-of-type(1) {
+    section > div:nth-of-type(1) {
         margin: 2em 2em 2em 2em;
-        height: 50vh;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: gray;
     }
 
     /* CHART */
@@ -221,7 +220,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section div:nth-of-type(2) div:nth-of-type(1)  {
@@ -230,7 +230,7 @@
 
     section div:nth-of-type(2) div:nth-of-type(1) button  {
         background: var(--color-3);
-        border: solid 2px var(--color-4);
+        border: solid 1px var(--color-4);
         color: var(--color-4);
         padding: 1em 1.4em;
         margin: 2em .2em;
@@ -245,12 +245,9 @@
         background: var(--color-2);
     }
 
-    section div:nth-of-type(2) div:nth-of-type(2) {
-        height: 75vh;
-    }
-
     #stacked-bar-chart-container {
-        width: 100%;
+        height: 60vh;
+        width: 80%;
     }
 
     /* RECAP */
@@ -258,7 +255,8 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 0 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section div:nth-of-type(3) h2, section div:nth-of-type(3) p {

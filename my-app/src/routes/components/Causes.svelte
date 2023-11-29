@@ -69,7 +69,7 @@
         const container = document.getElementById('radar-chart-container');
         const width = container.clientWidth;
         const height = container.clientHeight;
-        const margin = { top: 150, right: 200, bottom: 0, left: 150 }
+        const margin = { top: 150, right: 200, bottom: 150, left: 150 }
 
         const maxValue = Math.max(...data.map(d => d.value))
 
@@ -195,28 +195,24 @@
     <div>
         <h2 class="title-small">Recap</h2>
         <p class="p-text-normal">
-            Difficulty in Taking Measures:
-            Another factor is the challenge that some individuals face in implementing effective security measures. The online landscape is continually evolving, making it challenging to keep up with the latest security practices. For some, the technical aspects of online security can be intimidating, leading to hesitancy in taking action.
+            In the world of online security, some folks find it tricky to put effective safety measures in place. The fast-changing online scene makes it hard to keep up with the latest protection methods. For some, the technical side of online security is a bit overwhelming, and that can make them hesitant to take action.
             <br> <br>
-            Negligence:
-            Negligence also plays a role in the increasing number of victims of online crime. Some individuals do not take security measures seriously or mistakenly believe that it won't happen to them. This sense of invulnerability can result in negligence when implementing necessary protective measures.
+            Neglecting security also adds to the growing number of online crime victims. Some people don't take security seriously or believe they won't be targeted, leading them to skip protective steps.
             <br> <br>
-            Underestimation of Danger:
-            People can also become victims by underestimating the actual danger of online activities. They may not fully understand how their online behavior can impact their safety, inadvertently making them vulnerable to various forms of online criminality.
-            <br> <br>
-            It is essential to enhance awareness, leverage educational resources, and encourage proactive security measures. By understanding why individuals are vulnerable, we can collaboratively work towards reducing online risks and safeguarding individuals from the adverse consequences of cybercrime.</p>
+            Plus, there's a chunk of folks who become victims by not realizing how risky their online activities can be. They might not fully grasp the potential dangers, leaving them open to various online crimes.
     </div>
 
 </section>
 
 <style>
     /* TITLE */
-    section div:nth-of-type(1) {
+    section > div:nth-of-type(1) {
         margin: 2em 2em 2em 2em;
-        height: 50vh;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: gray;
     }
 
     /* CHART */
@@ -224,7 +220,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section div:nth-of-type(2) div:nth-of-type(1)  {
@@ -233,7 +230,7 @@
 
     section div:nth-of-type(2) div:nth-of-type(1) button  {
         background: var(--color-3);
-        border: solid 2px var(--color-4);
+        border: solid 1px var(--color-4);
         color: var(--color-4);
         padding: 1em 1.4em;
         margin: 2em .2em;
@@ -248,12 +245,9 @@
         background: var(--color-2);
     }
 
-    section div:nth-of-type(2) div:nth-of-type(2) {
-        height: 75vh;
-    }
-
     #radar-chart-container {
-        width: 100%;
+        height: 60vh;
+        width: 80%;
     }
 
     /* RECAP */
@@ -261,7 +255,8 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 0 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section div:nth-of-type(3) h2, section div:nth-of-type(3) p {

@@ -115,40 +115,31 @@
             <div bind:this={sunburstChart} id="sunburst-diagram-container"></div>
         </div>
         <div>
-            <p class="p-text-normal">A significant chunk of online crime involves fraud and scams. In particular, financial fraud plays a major role, with shady individuals using tricky methods to take money from people who aren't aware of their schemes.</p>
+            <p class="p-text-normal">A significant chunk of online crime involves fraud and scams. In particular, financial fraud plays a major role.</p>
         </div>
     </div>
     <div>
         <h2 class="title-small">Recap</h2>
         <p class="p-text-normal">
-            Scams / fraud: 
+            Online scams and fraud involve deceptive practices conducted through websites, emails, or messages. The goal is to trick individuals into disclosing personal or financial information. It's essentially a digital deception where perpetrators create a facade of trustworthiness to steal sensitive data or money.
             <br> <br>
-            Online scams often involve fake websites, emails, or messages that seem legitimate but aim to trick you into providing personal or financial information. It's like a digital con game where the bad actors pretend to be someone trustworthy to steal your money or sensitive data.
+            Hacking refers to the unauthorized entry into computer systems or networks. This act compromises privacy and can lead to identity theft, financial loss, or the unauthorized control of digital assets. 
             <br> <br>
-            Hacking:
+            Threats and intimidation in the online realm involve actions that can severely impact individuals' mental well-being. This includes constant worry or fear induced by mean or threatening messages. It's an online form of bullying that uses digital platforms to create a hostile environment, causing distress, sadness, and anxiety.
             <br> <br>
-            Hacking, which means breaking into computer systems without permission, is a growing problem. This isn't just about invading someone's privacy—it can lead to identity theft and losing money.
-            <br> <br>
-            Imagine someone breaking into your virtual "house" and going through your personal stuff. That's what hackers do in the digital world. They might steal your passwords, get access to your bank accounts, or even take control of your social media accounts.
-            <br> <br>
-            Intimidation / threats:
-            <br> <br>
-            When people use the internet to scare or threaten others, it can have serious effects on their mental well-being. Imagine feeling constantly worried or scared because someone is sending you mean or threatening messages online.
-            <br> <br>
-            This form of online crime can lead to deep feelings of sadness and anxiety. It's like dealing with a bully, but instead of facing them in person, the intimidation happens through screens and keyboards.
-            <br> <br>
-            Understanding these categories is crucial because it helps us recognize the tactics bad actors use online and empowers us to protect ourselves better. By being aware of these dangers, we can navigate the digital world more safely.</p>
+            Understanding these categories is crucial for recognizing online threats and empowering individuals to navigate the digital world safely. Awareness helps combat tactics used by malicious actors.</p>
     </div>
 </section>
 
 <style>
     /* TITLE */
-    section div:nth-of-type(1){
+    section > div:nth-of-type(1){
         margin: 2em 2em 2em 2em;
-        height: 50vh;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: gray;
     }
 
     /* CHART */
@@ -158,10 +149,10 @@
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section div:nth-of-type(2) div:nth-of-type(1) {
-        height: 100vh;
         grid-column-start: 2;
         grid-column-end: 8;
         display: flex;
@@ -170,6 +161,7 @@
     }
 
     #sunburst-diagram-container {
+        height: 60vh;
         width: 100%;
     }
 
@@ -190,7 +182,8 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 12em 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     section > div:nth-of-type(3) h2, section div:nth-of-type(3) p {

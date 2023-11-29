@@ -14,7 +14,10 @@
         <p>October, 2023</p>
     </nav>
     <h1 class="title-normal">The dangers <br> of the world <br> wide web</h1>
-    <p class="p-text-normal">In 2022, the Central Bureau of Statistics (CBS) in the Netherlands conducted a thorough examination into the realm of online crime. The findings of this study provide a comprehensive look into the multifaceted digital threats prevalent in our interconnected world. This article will distill key insights from the CBS report, focusing specifically on three primary categories of online criminality: scams/fraud, hacking, and intimidation/threats. <br> <br> Join us as we navigate through the results of the CBS study, examining the dangers that lurk in the digital shadows and pondering the profound implications these threats have on individuals' mental well-being.</p>
+    <p class="p-text-normal">
+        In 2022, the Netherlands Central Bureau of Statistics (CBS) delved into online crime, offering a detailed look at digital crime. This article summarizes key findings from the CBS report, focusing on three main types of online crime: scams/fraud, hacking, and intimidation/threats.
+        <br> <br>
+        Let's explore the CBS study results, uncovering the risks in the digital realm, how these threats impact people's mental well-being and why people become a victim of online crime.</p>
 </header>
 
 <style>
@@ -24,6 +27,7 @@
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 2em 2em 2em 2em;
+        background-color: gray;
     }
 
     /* NAV */
