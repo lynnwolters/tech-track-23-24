@@ -1,8 +1,8 @@
 <script>
     import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
-    import { gsap } from 'gsap/dist/gsap'
-    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+    // import { gsap } from 'gsap/dist/gsap'
+    // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let stackedBarChart
     let activeDataset = 'dataset1'
@@ -23,33 +23,6 @@
         const response = await fetch(url)
         const data = await response.json()
         createStackedBarChart(data)
-
-        gsap.registerPlugin(ScrollTrigger)
-
-        ScrollTrigger.create({
-            trigger: '#effects-title-container',
-            start: 'top top',
-            scrub: 1,
-            pin: true,
-            onEnter: () => {
-                animateTitle()
-            },
-            onLeaveBack: () => { 
-                reverseAnimateTitle()
-            },
-        })
-    }
-
-    function animateTitle() {
-        gsap.timeline()
-            .to('#effects-title-container h2 span:nth-of-type(1)', { opacity: 1})
-            .to('#effects-title-container h2 span:nth-of-type(2)', { opacity: 1})
-    }
-
-    function reverseAnimateTitle() {
-        gsap.timeline()
-            .to('#effects-title-container h2 span:nth-of-type(2)', { opacity: 0 })
-            .to('#effects-title-container h2 span:nth-of-type(1)', { opacity: 0 })
     }
 
     async function updateStackedBarChart() {
@@ -63,7 +36,7 @@
 
         d3.select(stackedBarChart)
             .selectAll('svg')
-            .remove();
+            .remove()
         
         await loadData(datasets[activeDataset])
         
@@ -83,15 +56,17 @@
 
     function createStackedBarChart(data) {
 
-        const width = 600
-        const height = 500
+        const container = document.getElementById('stacked-bar-chart-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
         const margin = { top: 0, right: 200, bottom: 0, left: 200 }
 
         const svg = d3
             .select(stackedBarChart)
             .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+            .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+            .attr('width', '100%')
+            .attr('height', '100%')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`)
 
@@ -200,10 +175,9 @@
 
 <section>
     
-    <div id="effects-title-container">
+    <div>
         <h2 class="title-normal">
-            <span>The</span>
-            <span>Effects</span>
+            The Effects
         </h2>
     </div>
     
@@ -215,7 +189,7 @@
             <button on:click={() => switchDataset('dataset3')} class:active={activeButton === 'dataset3'} class="p-text-small">Hacking</button>
             <button on:click={() => switchDataset('dataset4')} class:active={activeButton === 'dataset4'} class="p-text-small">Threats and intimidation</button>
         </div>
-        <div bind:this={stackedBarChart}></div>
+        <div bind:this={stackedBarChart} id="stacked-bar-chart-container"></div>
     </div>
     
     <div>
@@ -234,16 +208,12 @@
 
 <style>
     /* TITLE */
-    #effects-title-container {
+    section div:nth-of-type(1) {
         margin: 2em 2em 2em 2em;
-        height: 100vh;
+        height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    #effects-title-container h2 span:nth-of-type(1), #effects-title-container h2 span:nth-of-type(2)  {
-        opacity: 0;
     }
 
     /* CHART */
@@ -273,6 +243,14 @@
 
     section div:nth-of-type(2) div:nth-of-type(1) button.active  {
         background: var(--color-2);
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(2) {
+        height: 75vh;
+    }
+
+    #stacked-bar-chart-container {
+        width: 100%;
     }
 
     /* RECAP */

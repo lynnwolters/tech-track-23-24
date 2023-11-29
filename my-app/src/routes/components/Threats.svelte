@@ -1,8 +1,6 @@
 <script>
     import { onMount } from 'svelte'
     import * as d3 from 'd3'
-    import { gsap } from 'gsap/dist/gsap'
-    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let sunburstChart
 
@@ -11,63 +9,12 @@
         const data = await response.json()
         const generatedSunburstChart = createSunburstChart(data)
         d3.select(sunburstChart).append(() => generatedSunburstChart)
-
-        gsap.registerPlugin(ScrollTrigger)
-
-        ScrollTrigger.create({
-            trigger: '#threats-title-container',
-            start: 'top top',
-            scrub: 1,
-            pin: true,
-            onEnter: () => {
-                animateTitle()
-            },
-            onLeaveBack: () => { 
-                reverseAnimateTitle()
-            },
-        })
-
-        ScrollTrigger.create({
-        trigger: '#threats-chart-container',
-        start: 'top top',
-        scrub: 1,
-        pin: true,
-            onEnter: () => {
-                animateCircles()
-            },
-            onLeaveBack: () => { 
-                reverseAnimateCircles()
-            },
-        })
     })
 
-    function animateTitle() {
-        gsap.timeline()
-            .to('#threats-title-container h2 span:nth-of-type(1)', { opacity: 1})
-            .to('#threats-title-container h2 span:nth-of-type(2)', { opacity: 1})
-    }
-
-    function reverseAnimateTitle() {
-        gsap.timeline()
-            .to('#threats-title-container h2 span:nth-of-type(2)', { opacity: 0 })
-            .to('#threats-title-container h2 span:nth-of-type(1)', { opacity: 0 })
-    }
-
-    function animateCircles() {
-        gsap.timeline()
-            .to('.circle-1', { opacity: .2 })
-            .to('.circle-2', { opacity: 1 })
-    }
-
-    function reverseAnimateCircles() {
-        gsap.timeline()
-            .to('.circle-1', { opacity: 1 })
-            .to('.circle-2', { opacity: .2 })
-    }
-
     function createSunburstChart(data) {
-        const width = 600
-        const height = 600
+        const container = document.getElementById('sunburst-diagram-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
 
         const root = d3.hierarchy(data, d => d.children)
         root.sum(d => Math.max(0, d.value))
@@ -86,8 +33,8 @@
 
         const svg = d3.create('svg')
             .attr('viewBox', [-width / 2, -height / 2, width, height])
-            .attr('width', width)
-            .attr('height', height)
+            .attr('width', '100%')
+            .attr('height', '100%')
 
         const cell = svg
             .selectAll('g')
@@ -100,15 +47,9 @@
 
         cell.append('path')
             .attr('d', arc)
-            .attr('fill', d => {
-                return d.depth > 0 ? colorScale(d.data.name) : 'none'
-            })
-            .attr('stroke', d => {
-                return d.depth > 0 ? '#383838' : 'none'
-            })
-            .attr('stroke-width', d => {
-                return d.depth > 0 ? 1 : 0
-        })
+            .attr('fill', d => d.depth > 0 ? colorScale(d.data.name) : 'none')
+            .attr('stroke', d => d.depth > 0 ? '#383838' : 'none')
+            .attr('stroke-width', d => d.depth > 0 ? 1 : 0)
 
         function addTextToCell(selection, transformFunction) {
             selection
@@ -126,7 +67,7 @@
                     for (let i = 0; i < words.length; i++) {
                         const tspan = d3.select(this)
                             .append('tspan')
-                            .attr('dy', i === 0 ? 0 : '1em') 
+                            .attr('dy', i === 0 ? 0 : '1em')
                             .attr('x', 0)
                             .attr('text-anchor', 'middle')
                             .text(words[i])
@@ -134,47 +75,44 @@
                 })
         }
 
-    function getTransformFunction(d) {
-        if (d.depth === 1) {
-            const [x, y] = arc.centroid(d)
-            const angle = (d.x0 + (d.x1 - d.x0) / 2)
-            let rotation = angle * (180 / Math.PI)
-            if (rotation >= 90 && rotation <= 270) {
-                rotation += 180
+        function getTransformFunction(d) {
+            if (d.depth === 1) {
+                const [x, y] = arc.centroid(d)
+                const angle = (d.x0 + (d.x1 - d.x0) / 2)
+                let rotation = angle * (180 / Math.PI)
+                if (rotation >= 90 && rotation <= 270) {
+                    rotation += 180
+                }
+                return `translate(${x}, ${y}) rotate(${rotation})`
+            } else if (d.depth === 2) {
+                const x = (d.x0 + d.x1) / 2 * 180 / Math.PI
+                const y = (d.y0 + d.y1) / 2
+                return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`
             }
-            return `translate(${x}, ${y}) rotate(${rotation})`
-        } else if (d.depth === 2) {
-            const x = (d.x0 + d.x1) / 2 * 180 / Math.PI
-            const y = (d.y0 + d.y1) / 2
-            return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`
         }
-    }
 
-    cell.filter(d => d.depth === 1)
+        cell.filter(d => d.depth === 1)
             .attr('class', 'circle-1')
-            .attr('opacity', '1')
             .call(selection => addTextToCell(selection, getTransformFunction))
 
         cell.filter(d => d.depth === 2)
             .attr('class', 'circle-2')
-            .attr('opacity', '.2')
             .call(selection => addTextToCell(selection, getTransformFunction))
 
-    return svg.node()
+        return svg.node()
     }
 </script>
 
 <section>
-    <div id="threats-title-container">
+    <div>
         <h2 class="title-normal">
-            <span>The</span>
-            <span>Threats</span>
+            The Threats
         </h2>
     </div>
-    <div id="threats-chart-container">
+    <div>
         <div>
             <p class="p-text-normal">Total online crime in 2022 <br> (32.861 respondents)</p>
-            <div bind:this={sunburstChart}></div>
+            <div bind:this={sunburstChart} id="sunburst-diagram-container"></div>
         </div>
         <div>
             <p class="p-text-normal">A significant chunk of online crime involves fraud and scams. In particular, financial fraud plays a major role, with shady individuals using tricky methods to take money from people who aren't aware of their schemes.</p>
@@ -205,28 +143,25 @@
 
 <style>
     /* TITLE */
-    #threats-title-container {
+    section div:nth-of-type(1){
         margin: 2em 2em 2em 2em;
-        height: 100vh;
+        height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    #threats-title-container h2 span:nth-of-type(1), #threats-title-container h2 span:nth-of-type(2)  {
-        opacity: 0;
-    }
-
     /* CHART */
-    #threats-chart-container {
-        overflow-y: scroll; 
+    section div:nth-of-type(2) {
         display: grid;
+        align-items: center;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 0 2em 12em 2em;
+        margin: 2em 2em 2em 2em;
     }
 
-    #threats-chart-container div:nth-of-type(1) {
+    section div:nth-of-type(2) div:nth-of-type(1) {
+        height: 100vh;
         grid-column-start: 2;
         grid-column-end: 8;
         display: flex;
@@ -234,13 +169,17 @@
         align-items: center;
     }
 
-    #threats-chart-container div:nth-of-type(1) p {
+    #sunburst-diagram-container {
+        width: 100%;
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(1) p {
         margin-bottom: 2em;
         text-align: center;
     }
 
-    #threats-chart-container div:nth-of-type(2) {
-        grid-column-start: 9;
+    section div:nth-of-type(2) div:nth-of-type(2) {
+        grid-column-start: 8;
         grid-column-end: 12;
         display: flex;
         align-items: center;
@@ -251,7 +190,7 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 0 2em 12em 2em;
+        margin: 12em 2em 12em 2em;
     }
 
     section > div:nth-of-type(3) h2, section div:nth-of-type(3) p {
@@ -264,27 +203,24 @@
     }
 
     @media (max-width: 960px) {
-        section > div:nth-of-type(2) div:nth-of-type(1) {
+        section div:nth-of-type(2) div:nth-of-type(1) {
             grid-column-start: 2;
             grid-column-end: 12;
-            margin-bottom: 12em;
         }
 
-        section > div:nth-of-type(2) div:nth-of-type(2) {
-            grid-column-start: 4;
-            grid-column-end: 10;
+        section div:nth-of-type(2) div:nth-of-type(2) {
+            display: none;
         }
     }
 
     @media (max-width: 800px) {
-        section > div:nth-of-type(2) div:nth-of-type(1) {
+        section div:nth-of-type(2) div:nth-of-type(1) {
             grid-column-start: 1;
             grid-column-end: 13;
         }
 
-        section > div:nth-of-type(2) div:nth-of-type(2) {
-            grid-column-start: 3;
-            grid-column-end: 11;
+        section div:nth-of-type(2) div:nth-of-type(2) {
+            display: none;
         }
 
         section > div:nth-of-type(3) h2, section div:nth-of-type(3) p {
@@ -294,14 +230,13 @@
     }
 
     @media (max-width: 560px) {
-        section > div:nth-of-type(2) div:nth-of-type(1) {
+        section div:nth-of-type(2) div:nth-of-type(1) {
             grid-column-start: 1;
             grid-column-end: 13;
         }
 
-        section > div:nth-of-type(2) div:nth-of-type(2) {
-            grid-column-start: 1;
-            grid-column-end: 13;
+        section div:nth-of-type(2) div:nth-of-type(2) {
+            display: none;
         }
 
         section > div:nth-of-type(3) h2, section div:nth-of-type(3) p {

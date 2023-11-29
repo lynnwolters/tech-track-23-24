@@ -1,8 +1,8 @@
 <script>
     import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
-    import { gsap } from 'gsap/dist/gsap'
-    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+    // import { gsap } from 'gsap/dist/gsap'
+    // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let radarChart
     let activeDataset = 'dataset1'
@@ -23,33 +23,6 @@
         const response = await fetch(url)
         const data = await response.json()
         createRadarChart(data)
-
-        gsap.registerPlugin(ScrollTrigger)
-
-        ScrollTrigger.create({
-            trigger: '#causes-title-container',
-            start: 'top top',
-            scrub: 1,
-            pin: true,
-            onEnter: () => {
-                animateTitle()
-            },
-            onLeaveBack: () => { 
-                reverseAnimateTitle()
-            },
-        })
-    }
-
-    function animateTitle() {
-        gsap.timeline()
-            .to('#causes-title-container h2 span:nth-of-type(1)', { opacity: 1})
-            .to('#causes-title-container h2 span:nth-of-type(2)', { opacity: 1})
-    }
-
-    function reverseAnimateTitle() {
-        gsap.timeline()
-            .to('#causes-title-container h2 span:nth-of-type(2)', { opacity: 0 })
-            .to('#causes-title-container h2 span:nth-of-type(1)', { opacity: 0 })
     }
 
     async function updateRadarChart() {
@@ -93,9 +66,10 @@
     }
 
     function createRadarChart(data) {
-        const width = 500
-        const height = 500
-        const margin = { top: 150, right: 200, bottom: 150, left: 200 }
+        const container = document.getElementById('radar-chart-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        const margin = { top: 150, right: 200, bottom: 0, left: 150 }
 
         const maxValue = Math.max(...data.map(d => d.value))
 
@@ -103,10 +77,11 @@
 
         const svg = d3.select(radarChart)
             .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+            .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+            .attr('width', '100%')
+            .attr('height', '100%')
             .append('g')
-            .attr('transform', `translate(${margin.left + width / 2},${margin.top + height / 2})`)
+            .attr('transform', `translate(${(width + margin.left + margin.right) / 2}, ${(height + margin.top + margin.bottom) / 2})`)
 
         const radius = d3.scaleLinear()
             .domain([0, maxValue])
@@ -200,10 +175,9 @@
 
 <section>
     
-    <div id="causes-title-container">
+    <div>
         <h2 class="title-normal">
-            <span>The</span>
-            <span>Cause</span>
+            The Cause
         </h2>
     </div>
     
@@ -215,7 +189,7 @@
             <button on:click={() => switchDataset('dataset3')} class:active={activeButton === 'dataset3'} class="p-text-small">Reason 3</button>
         </div> 
         <p class="p-text-normal">{additionalText}</p>
-        <div bind:this={radarChart}></div> 
+        <div bind:this={radarChart} id="radar-chart-container"></div> 
     </div>
     
     <div>
@@ -237,16 +211,12 @@
 
 <style>
     /* TITLE */
-    #causes-title-container {
+    section div:nth-of-type(1) {
         margin: 2em 2em 2em 2em;
-        height: 100vh;
+        height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    #causes-title-container h2 span:nth-of-type(1), #causes-title-container h2 span:nth-of-type(2)  {
-        opacity: 0;
     }
 
     /* CHART */
@@ -276,6 +246,14 @@
 
     section div:nth-of-type(2) div:nth-of-type(1) button.active  {
         background: var(--color-2);
+    }
+
+    section div:nth-of-type(2) div:nth-of-type(2) {
+        height: 75vh;
+    }
+
+    #radar-chart-container {
+        width: 100%;
     }
 
     /* RECAP */
