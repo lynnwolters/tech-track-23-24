@@ -42,6 +42,6 @@ Deze applicatie is gebouwd met:
 
 * Svelte.kit
 * D3
-* GSAP
-* JS
-* HTMl / CSS
+* sap
+* Js
+* Html / Css
