@@ -68,7 +68,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gray;
     }
 
     section > div:nth-of-type(1) h2 {
@@ -87,7 +86,6 @@
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 2em 2em 2em 2em;
-        background-color: gray;
     }
 
     section div:nth-of-type(2) p {

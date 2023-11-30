@@ -75,7 +75,6 @@
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 2em 2em 2em 2em;
-        background-color: gray;
     }
 
     /* NAV */

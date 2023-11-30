@@ -254,7 +254,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gray;
     }
 
     .type-effect-causes {
@@ -267,7 +266,6 @@
         flex-direction: column;
         align-items: center;
         margin: 2em 2em 2em 2em;
-        background-color: gray;
     }
 
     section div:nth-of-type(2) div:nth-of-type(1)  {
@@ -301,8 +299,7 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 2em 2em 2em 2em;
-        background-color: gray;
+        margin: 12em 2em 12em 2em;
     }
 
     section div:nth-of-type(3) h2, section div:nth-of-type(3) p {

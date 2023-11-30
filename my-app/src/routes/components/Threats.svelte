@@ -21,7 +21,49 @@
             // pin: true,
             onEnter: () => typeEffectThreats(),
         })
+
+        ScrollTrigger.create({
+            trigger: 'section div:nth-of-type(2)',
+            start: 'center center',
+            scrub: 1,
+            // pin: true,
+            onToggle: (self) => {
+                if (self.isActive) {
+                    highlightSegment('.segment-payment-fraud')
+                    highlightSegment('.segment-identity-fraud')
+                    highlightSegment('.segment-phishing')
+                    highlightSegment('.segment-hacking')
+                    highlightSegment('.segment-device')
+                    highlightSegment('.segment-account')
+                    highlightSegment('.segment-threats-and-intimidation')
+                    highlightSegment('.segment-shame-texting')
+                    highlightSegment('.segment-stalking')
+                    highlightSegment('.segment-bullying')
+                    highlightSegment('.segment-threats')
+                } else {
+                    unhighlightSegment('.segment-payment-fraud')
+                    unhighlightSegment('.segment-identity-fraud')
+                    unhighlightSegment('.segment-phishing')
+                    unhighlightSegment('.segment-hacking')
+                    unhighlightSegment('.segment-device')
+                    unhighlightSegment('.segment-account')
+                    unhighlightSegment('.segment-threats-and-intimidation')
+                    unhighlightSegment('.segment-shame-texting')
+                    unhighlightSegment('.segment-stalking')
+                    unhighlightSegment('.segment-bullying')
+                    unhighlightSegment('.segment-threats')
+                }
+            },
+        })
     })
+
+    function highlightSegment(selector) {
+        gsap.to(selector + ' path', { opacity: '.4', duration: .5 })
+    }
+
+    function unhighlightSegment(selector) {
+        gsap.to(selector + ' path', { opacity: '1', duration: .5 });
+    }
 
     function typeEffectThreats() {
         const text = document.querySelector('.type-effect-threats')
@@ -136,12 +178,35 @@
         }
 
         cell.filter(d => d.depth === 1)
-            .attr('class', 'circle-1')
             .call(selection => addTextToCell(selection, getTransformFunction))
 
         cell.filter(d => d.depth === 2)
-            .attr('class', 'circle-2')
             .call(selection => addTextToCell(selection, getTransformFunction))
+
+        cell.filter(d => d.data.name === 'payment fraud')
+            .attr('class', 'segment-payment-fraud')
+        cell.filter(d => d.data.name === 'identity fraud')
+            .attr('class', 'segment-identity-fraud')
+        cell.filter(d => d.data.name === 'phishing')
+            .attr('class', 'segment-phishing')
+        cell.filter(d => d.data.name === 'hacking')
+
+            .attr('class', 'segment-hacking')
+        cell.filter(d => d.data.name === 'device')
+            .attr('class', 'segment-device')
+        cell.filter(d => d.data.name === 'account')
+            .attr('class', 'segment-account')
+        cell.filter(d => d.data.name === 'threats and intimidation')
+
+            .attr('class', 'segment-threats-and-intimidation')
+        cell.filter(d => d.data.name === 'shame texting')
+            .attr('class', 'segment-shame-texting')
+        cell.filter(d => d.data.name === 'stalking')
+            .attr('class', 'segment-stalking')
+        cell.filter(d => d.data.name === 'bullying')
+            .attr('class', 'segment-bullying')
+        cell.filter(d => d.data.name === 'threats')
+            .attr('class', 'segment-threats')
 
         return svg.node()
     }
@@ -181,7 +246,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gray;
     }
 
     .type-effect-threats {
@@ -195,7 +259,6 @@
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
         margin: 2em 2em 2em 2em;
-        background-color: gray;
     }
 
     section div:nth-of-type(2) div:nth-of-type(1) {
@@ -228,8 +291,7 @@
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 2em 2em 2em 2em;
-        background-color: gray;
+        margin: 12em 2em 12em 2em;
     }
 
     section > div:nth-of-type(3) h2, section div:nth-of-type(3) p {
