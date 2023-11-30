@@ -1,8 +1,8 @@
 <script>
     import { onMount, tick } from 'svelte'
     import * as d3 from 'd3'
-    // import { gsap } from 'gsap/dist/gsap'
-    // import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+    import { gsap } from 'gsap/dist/gsap'
+    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
     let stackedBarChart
     let activeDataset = 'dataset1'
@@ -23,6 +23,48 @@
         const response = await fetch(url)
         const data = await response.json()
         createStackedBarChart(data)
+
+        gsap.registerPlugin(ScrollTrigger)
+
+        ScrollTrigger.create({
+            trigger: '.type-effect-effects-trigger',
+            start: 'top top',
+            end: '+=100%',
+            // pin: true,
+            onEnter: () => typeEffectEffects(),
+        })
+    }
+
+    function typeEffectEffects() {
+        const text = document.querySelector('.type-effect-effects')
+        const characters = text.textContent.split('')
+
+        text.textContent = ''
+
+        gsap.to(text, { opacity: 1 })
+
+        characters.forEach((char, index) => {
+            const span = document.createElement('span')
+            span.textContent = char
+            span.style.opacity = 0
+            text.appendChild(span)
+
+            gsap.to(span, {
+                opacity: 1,
+                duration: 0,
+                delay: index * 0.075,
+                onComplete: () => {
+                    if (index === characters.length - 1) {
+                        const cursor = document.createElement('span')
+                        cursor.textContent = '|'
+                        cursor.classList.add('cursor')
+                        text.appendChild(cursor)
+
+                        gsap.to(cursor, { opacity: 0, repeat: -1, yoyo: true, duration: 0.7 })
+                    }
+                }
+            })
+        })
     }
 
     async function updateStackedBarChart() {
@@ -173,12 +215,10 @@
     }
 </script>
 
-<section>
+<section class="type-effect-effects-trigger">
     
     <div>
-        <h2 class="title-normal">
-            The Effects
-        </h2>
+        <h2 class="title-normal type-effect-effects">The Effects</h2>
     </div>
     
     <div>
@@ -213,6 +253,10 @@
         justify-content: center;
         align-items: center;
         background-color: gray;
+    }
+
+    .type-effect-effects {
+        opacity: 0;
     }
 
     /* CHART */
