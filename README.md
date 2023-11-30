@@ -9,7 +9,7 @@ Welkom bij de repository voor The Dangers of The World Wide Web. Deze website la
 1. Voer het volgende in je terminal in:
 
 ```js
-git clone https://github.com/lynnwolters/tech-track-23-24
+git clone https://github.com/lynnwolters/tech-track-23-24.git
 ```
 
 2. Om de applicatie op de juiste manier te laten draaien heb je Node.js en NPM nodig. Heb je deze nog niet geïnstalleerd, dan doe je dat door de volgende command line in te voeren in je terminal: 
