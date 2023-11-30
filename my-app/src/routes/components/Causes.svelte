@@ -28,7 +28,7 @@
 
         ScrollTrigger.create({
             trigger: '.type-effect-causes-trigger',
-            start: 'top top',
+            start: 'top-=400 top',
             end: '+=100%',
             // pin: true,
             onEnter: () => typeEffectCauses(),

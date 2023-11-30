@@ -6,7 +6,7 @@
     onMount(async function () {
         gsap.registerPlugin(ScrollTrigger)
         typeEffectHeader()
-        // slideIn()
+        slideInHeader()
     })
 
     function typeEffectHeader() {
@@ -39,21 +39,20 @@
         })
     }
 
-    // function slideIn() {
-    //     const intro = document.querySelector('.slide-in-header')
+    function slideInHeader() {
+        const slideInHeader = document.querySelector('.slide-in-header')
 
-    //     gsap.from(intro, {
-    //         opacity: 0,
-    //         y: 50,
-    //         duration: 1,
-    //         scrollTrigger: {
-    //             trigger: 'header',
-    //             start: 'top top',
-    //             end: '+=300',
-    //             scrub: 1
-    //         }
-    //     })
-    // }
+        gsap.from(slideInHeader, {
+            opacity: 0,
+            y: 50,
+            scrollTrigger: {
+                trigger: 'header',
+                start: 'top top',
+                end: '+=300',
+                scrub: 1
+            }
+        })
+    }
 </script>
 
 <header>

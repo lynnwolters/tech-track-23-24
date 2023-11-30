@@ -16,7 +16,7 @@
 
         ScrollTrigger.create({
             trigger: '.type-effect-threats-trigger',
-            start: 'top top',
+            start: 'top-=400 top',
             end: '+=100%',
             // pin: true,
             onEnter: () => typeEffectThreats(),
@@ -58,7 +58,7 @@
     })
 
     function highlightSegment(selector) {
-        gsap.to(selector + ' path', { opacity: '.4', duration: .5 })
+        gsap.to(selector + ' path', { opacity: '.2', duration: .5 })
     }
 
     function unhighlightSegment(selector) {

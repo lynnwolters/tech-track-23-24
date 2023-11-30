@@ -8,10 +8,23 @@
 
         ScrollTrigger.create({
             trigger: '.type-effect-conclusion-trigger',
-            start: 'top top',
+            start: 'top-=400 top',
             end: '+=100%',
             // pin: true,
             onEnter: () => typeEffectConclusion(),
+        })
+        
+        const slideInConclusion = document.querySelector('.slide-in-conclusion')
+
+        gsap.from(slideInConclusion, {
+            opacity: 0,
+            y: 50,
+            scrollTrigger: {
+                trigger: '.type-effect-conclusion-trigger',
+                start: 'bottom bottom',
+                end: '-=300',
+                scrub: 1
+            }
         })
     })
 
@@ -55,7 +68,7 @@
     </div>
     
     <div>
-        <p class="p-text-normal">To sum up, the 2022 CBS study on online crime in the Netherlands gives us a clear picture of the challenges we face in the digital world. Beyond just numbers, it shows that online threats like scams/fraud, hacking, and threats/intimidation have real and profound impacts on individuals and society. <br> <br> The study underscores the need for action. People often become victims due to a lack of awareness, weak security practices, or underestimating online dangers. The key takeaway is that we must be proactive in understanding and protecting ourselves from these threats. <br> <br> So, let's take this as a wake-up call. By promoting cybersecurity education, adopting strong protective measures, and fostering a shared responsibility, we can collectively work to reduce the impact of online crime. For practical tips on staying safe online, check out the article <a target="_blank" href="https://laatjeniethackmaken.nl/">"Laat Je Niet Hack Maken"</a> Stay informed, be vigilant, and let's navigate the digital landscape with confidence.</p>
+        <p class="p-text-normal slide-in-conclusion">To sum up, the 2022 CBS study on online crime in the Netherlands gives us a clear picture of the challenges we face in the digital world. Beyond just numbers, it shows that online threats like scams/fraud, hacking, and threats/intimidation have real and profound impacts on individuals and society. <br> <br> The study underscores the need for action. People often become victims due to a lack of awareness, weak security practices, or underestimating online dangers. The key takeaway is that we must be proactive in understanding and protecting ourselves from these threats. <br> <br> So, let's take this as a wake-up call. By promoting cybersecurity education, adopting strong protective measures, and fostering a shared responsibility, we can collectively work to reduce the impact of online crime. For practical tips on staying safe online, check out the article <a target="_blank" href="https://laatjeniethackmaken.nl/">"Laat Je Niet Hack Maken"</a> Stay informed, be vigilant, and let's navigate the digital landscape with confidence.</p>
     </div>
 
 </section>
