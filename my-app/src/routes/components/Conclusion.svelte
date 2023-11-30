@@ -93,12 +93,12 @@
 
     /* TEXT */
     section div:nth-of-type(2) {
-        height: 100vh;
+        height: 50vh;
         display: grid;
         align-items: center;
         grid-template-columns: repeat(12, 1fr);
         column-gap: 2em;
-        margin: 2em 2em 2em 2em;
+        margin: 2em 2em 12em 2em;
     }
 
     section div:nth-of-type(2) p {
