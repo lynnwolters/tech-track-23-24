@@ -54,7 +54,6 @@ a, button {
     font-family: 'Coder\'s Crux';
     color: var(--color-3);
     line-height: 70%;
-    /* text-transform: uppercase; */
 }
 
 .p-text-normal {

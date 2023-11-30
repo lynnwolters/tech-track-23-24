@@ -10,7 +10,6 @@
             trigger: '.type-effect-conclusion-trigger',
             start: 'top-=400 top',
             end: '+=100%',
-            // pin: true,
             onEnter: () => typeEffectConclusion(),
         })
         

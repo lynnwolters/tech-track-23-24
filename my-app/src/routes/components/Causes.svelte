@@ -30,7 +30,6 @@
             trigger: '.type-effect-causes-trigger',
             start: 'top-=400 top',
             end: '+=100%',
-            // pin: true,
             onEnter: () => typeEffectCauses(),
         })
     }
@@ -78,7 +77,7 @@
 
         d3.select(radarChart)
             .selectAll('svg')
-            .remove();
+            .remove()
         
         await loadData(datasets[activeDataset])
         
@@ -95,22 +94,22 @@
         activeButton = dataset
         switch (dataset) {
             case 'dataset1':
-                additionalText = "“I don't think it's necessary.”";
-                break;
+                additionalText = "“I don't think it's necessary.”"
+                break
             case 'dataset2':
-                additionalText = "“I find it too difficult.”";
-                break;
+                additionalText = "“I find it too difficult.”"
+                break
             case 'dataset3':
-                additionalText = "“Takes too much time to do it.”";
-                break;
+                additionalText = "“Takes too much time to do it.”"
+                break
         }
         tick().then(() => updateRadarChart())
     }
 
     function createRadarChart(data) {
-        const container = document.getElementById('radar-chart-container');
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        const container = document.getElementById('radar-chart-container')
+        const width = container.clientWidth
+        const height = container.clientHeight
         const margin = { top: 150, right: 200, bottom: 150, left: 150 }
 
         const maxValue = Math.max(...data.map(d => d.value))

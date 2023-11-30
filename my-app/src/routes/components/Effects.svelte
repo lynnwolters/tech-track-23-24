@@ -30,7 +30,6 @@
             trigger: '.type-effect-effects-trigger',
             start: 'top-=400 top',
             end: '+=100%',
-            // pin: true,
             onEnter: () => typeEffectEffects(),
         })
     }
@@ -98,9 +97,9 @@
 
     function createStackedBarChart(data) {
 
-        const container = document.getElementById('stacked-bar-chart-container');
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        const container = document.getElementById('stacked-bar-chart-container')
+        const width = container.clientWidth
+        const height = container.clientHeight
         const margin = { top: 0, right: 200, bottom: 0, left: 200 }
 
         const svg = d3

@@ -18,7 +18,6 @@
             trigger: '.type-effect-threats-trigger',
             start: 'top-=400 top',
             end: '+=100%',
-            // pin: true,
             onEnter: () => typeEffectThreats(),
         })
 
@@ -26,7 +25,6 @@
             trigger: 'section div:nth-of-type(2)',
             start: 'center center',
             scrub: 1,
-            // pin: true,
             onToggle: (self) => {
                 if (self.isActive) {
                     highlightSegment('.segment-payment-fraud')
@@ -62,7 +60,7 @@
     }
 
     function unhighlightSegment(selector) {
-        gsap.to(selector + ' path', { opacity: '1', duration: .5 });
+        gsap.to(selector + ' path', { opacity: '1', duration: .5 })
     }
 
     function typeEffectThreats() {
@@ -98,9 +96,9 @@
     }
 
     function createSunburstChart(data) {
-        const container = document.getElementById('sunburst-diagram-container');
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        const container = document.getElementById('sunburst-diagram-container')
+        const width = container.clientWidth
+        const height = container.clientHeight
 
         const root = d3.hierarchy(data, d => d.children)
         root.sum(d => Math.max(0, d.value))
@@ -190,14 +188,12 @@
         cell.filter(d => d.data.name === 'phishing')
             .attr('class', 'segment-phishing')
         cell.filter(d => d.data.name === 'hacking')
-
             .attr('class', 'segment-hacking')
         cell.filter(d => d.data.name === 'device')
             .attr('class', 'segment-device')
         cell.filter(d => d.data.name === 'account')
             .attr('class', 'segment-account')
         cell.filter(d => d.data.name === 'threats and intimidation')
-
             .attr('class', 'segment-threats-and-intimidation')
         cell.filter(d => d.data.name === 'shame texting')
             .attr('class', 'segment-shame-texting')
