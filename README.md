@@ -1,8 +1,8 @@
-<img width="1041" alt="Scherm­afbeelding 2023-11-08 om 12 32 45" src="https://github.com/lynnwolters/tech-track-23-24/assets/47858242/3136cd25-136b-4347-91c5-d4a594c5f2ae">
-
 # The Dangers of The World Wide Web
 
 Welkom bij de repository voor The Dangers of The World Wide Web. Deze website laat je de gevaren, effecten en oorzaken van online criminaliteit zien en hoe je jezelf daar tegen kunt beschermen.
+
+<img width="1041" alt="Scherm­afbeelding 2023-11-08 om 12 32 45" src="https://github.com/lynnwolters/tech-track-23-24/assets/47858242/3136cd25-136b-4347-91c5-d4a594c5f2ae">
 
 ## Hoe installeer je deze applicatie?
 
